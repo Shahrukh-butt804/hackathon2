@@ -1,20 +1,22 @@
 "use client"
 
 import Image from "next/image";
-import {OctagonAlert,ArrowDown,Check,ShoppingCart} from "lucide-react"
+import {OctagonAlert,ArrowDown,Check,ShoppingCart,Menu} from "lucide-react"
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 export default function Home() {
 
+  const [isOpen,setIsOpen] = useState(false)
   const router = useRouter()
 
   return (
     <>
     {/*  Top Nav */}
-      <div className="flex justify-between bg-[#272343] text-white items-center px-[300px] py-[14px]">
+      <div className="flex justify-center md:justify-between bg-[#272343] text-white items-center  md:px-[300px] py-[14px]">
        
-        <div className="flex items-center gap-2"> <span><Check size={16}/></span>
+        <div className="hidden items-center gap-2 md:flex"> <span><Check size={16}/></span>
         <p>Free shipping on all orders over $50</p></div>
 
 
@@ -28,7 +30,7 @@ export default function Home() {
 
 
     {/* Mid Nav */}
-    <div className="flex justify-between bg-[#f0f2f3]  items-center px-[300px] py-[20px]">
+    <div className="flex justify-between bg-[#f0f2f3]  items-center px-5 md:px-[300px] py-[20px]">
        
        <div className="flex items-center gap-3"> <Image src={"/logo.png"} alt="logo" width={40} height={40} />
        <p className="text-3xl font-bold">Comforty</p></div>
@@ -45,9 +47,8 @@ export default function Home() {
 
 
           {/* Navbar */}
-    <div className="flex justify-between shadow-lg  items-center px-[300px] py-[14px]">
-       
-       <div className="flex items-center gap-[32px] font-bold text-[14px] text-slate-500">
+     <div className="flex justify-between shadow-lg  items-center px-5 md:px-[300px] py-[14px]">
+       <div className="hidden md:flex items-center gap-[32px] font-bold text-[14px] text-slate-500">
         <h1
         onClick={() => router.push("/")}
         className="hover:text-[#007580] cursor-pointer">Home</h1>
@@ -61,7 +62,6 @@ export default function Home() {
         <h1
         onClick={()=>router.push("/aboutus")}
         className="hover:text-[#007580] cursor-pointer">About us</h1>
-
        </div>
        
 
@@ -73,6 +73,29 @@ export default function Home() {
         </div>
    
        </div>
+
+        <div
+        onClick={() => setIsOpen(!isOpen)}
+        className="block md:hidden"><Menu/></div>
+
+        <div className={`${isOpen? "block":"hidden"} bg-white shadow-xl transition-all duration-300 w-48 h-fit p-2 absolute top-52 right-1`}>
+          
+        <div className="flex flex-col items-center gap-[32px] font-bold text-[14px] text-slate-500">
+        <h1
+        onClick={() => router.push("/")}
+        className="hover:text-[#007580] cursor-pointer">Home</h1>
+        <h1 className="hover:text-[#007580] cursor-pointer">Shop</h1>
+        <h1 className="hover:text-[#007580] cursor-pointer">Product</h1>
+        <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
+        <h1
+        onClick={()=>router.push("/contactus")}
+        className="hover:text-[#007580] cursor-pointer">Contact us</h1>
+
+        <h1
+        onClick={()=>router.push("/aboutus")}
+        className="hover:text-[#007580] cursor-pointer">About us</h1>
+       </div>
+        </div>
 
      </div>
 

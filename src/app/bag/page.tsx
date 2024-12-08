@@ -11,9 +11,9 @@ export default function Page() {
   const router = useRouter();
   return (
     <>
-    <section className="px-[300px] mb-24">
+    <section className="px-5 md:px-[300px] mb-2 md:mb-24">
       <div className="mx-auto max-w-screen-xl  py-8 ">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-10">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:items-center md:gap-10">
           <div className="md:col-span-3 ">
             <h1 className="my-5 text-xl font-semibold">Bag</h1>
 

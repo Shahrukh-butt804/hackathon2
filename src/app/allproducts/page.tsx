@@ -61,10 +61,10 @@ export default function Page() {
     const router = useRouter()
   return (
       <>
-    <div className="px-[300px] my-24 ">
-      {/* Featured Product */}
-      <div className="font-semibold text-[32px] mt-10">All products</div>
-      <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
+    <div className="md:px-[300px] my-24 ">
+      {/* All products */}
+      <div className="font-semibold text-center md:text-start text-[32px] mt-10">All products</div>
+      <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
         {featuredProduct.map((product, index) => (
           <div key={index} className=" p-1">
             {" "}
@@ -92,11 +92,11 @@ export default function Page() {
       
       </div>
 
-       <div className="flex flex-col gap-2 bg-slate-200 pt-16">
+       <div className="flex flex-col gap-2 px-4 md:px-0 bg-slate-200 pt-16">
       <div className="font-semibold text-3xl text-center mt-10">Or subscribe to the newsletter</div>
 
         <div>
-        <div className="flex flex-row justify-center gap-24 mt-4">
+        <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-24 mt-4">
              <div>
              <input
                 className="border-none w-80 bg-transparent focus:outline-none p-2"
@@ -113,7 +113,7 @@ export default function Page() {
                 
                 placeholder="Submit"
               />
-              <hr className="h-[1.5px] bg-slate-500" />
+              <hr className="hidden md:block h-[1.5px] bg-slate-500" />
            </div>
             </div>
         </div>
@@ -121,7 +121,7 @@ export default function Page() {
 
         <div className="font-semibold text-3xl text-center mt-20">Follow products and discounts on Instagram</div>
         
-        <div className="flex px-[300px] items-center flex-wrap gap-3 mt-6 mb-24">
+        <div className="flex md:px-[300px] items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
         {product.map((product, index) => (
           <div key={index} className=" p-1">
             {" "}

@@ -6,7 +6,7 @@ import { MoveRight} from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-50 text-slate-600 ps-[300px] font-thin w-full absolute left-0 ">
+    <footer className="bg-slate-50 text-slate-600 md:ps-[300px] font-thin w-full absolute left-0 ">
       <div className="mx-auto max-w-screen-xl px-4 pb-5 pt-16 sm:px-6 lg:px-0">
         <div className="flex items-center">
           <div className="mt-8 grid grid-cols-2 gap-5 lg:mt-0 lg:grid-cols-6 lg:gap-y-16">
@@ -158,7 +158,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8  ">
-          <div className="pr-[300px] flex  justify-between  items-center">
+          <div className="md:pr-[300px] flex md:flex-row flex-col gap-2 md:gap-0  justify-between  items-center">
             <p className="text-md text-gray-500 opacity-50">
               &copy; Copyright Rimel 2022. All right reserved
             </p>

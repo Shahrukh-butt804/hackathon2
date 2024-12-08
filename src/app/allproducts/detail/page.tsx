@@ -27,7 +27,7 @@ export default function Page() {
   return (
 
     <>
-    <section className='my-20'>
+    <section className='my-2 md:my-20'>
     <div className=" mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-[180px]">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-start md:gap-10">
 
@@ -67,14 +67,14 @@ export default function Page() {
     </div>
   </section>
 
-        <div className='px-[300px]'>
+        <div className='md:px-[300px]'>
         
-        <div className='flex justify-between items-center mb-10'>
+        <div className='flex justify-center gap-12 md:gap-0 md:justify-between items-center mb-10'>
         <p className=" font-semibold text-[28px] mt-10">Featured Product</p>
         <p className=" font-semibold underline text-[16px] mt-10">View All</p>
         </div>
 
-      <div className="flex items-center flex-wrap gap-4 mt-6 mb-24">
+      <div className="flex items-center justify-center md:justify-normal flex-wrap gap-4 mt-6 mb-24">
         {product.map((product, index) => (
           <div key={index} className=" p-1">
             {" "}

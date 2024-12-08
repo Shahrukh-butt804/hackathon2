@@ -61,11 +61,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="px-[300px] flex justify-center items-center ">
-        <div className="bg-[url('/herobg.png')] w-full rouded-lg mt-3 bg-cover bg-center h-screen">
-          <div className="flex flex-col gap-4 px-10 justify-center h-full items-start  ">
+      <div className="md:px-[300px] flex justify-center items-center ">
+        <div className="md:bg-[url('/herobg.png')] w-full rouded-lg mt-3 bg-cover bg-center md:h-screen">
+          <div className="flex flex-col gap-2 md:gap-4 px-10 mt-10 md:mt-0 md:justify-center h-full items-start  ">
             <p className="text-slate-700">Welcome to chairy</p>
-            <p className="font-bold text-[55px] w-[530px] h-[198px] tracking-tight leading-none">
+            <p className="font-bold text-[45px] md:text-[55px] md:w-[530px] h-[198px] tracking-tight leading-none">
               Best Furniture Collection for your interior.
             </p>
             <Button
@@ -76,7 +76,10 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="flex items-center flex-wrap gap-5 mt-6">
+
+
+
+          <div className="flex items-center justify-center md:justify-normal flex-wrap  gap-5 mt-6">
             {logos.map((logo, index) => (
               <div key={index} className=" p-1">
                 {" "}
@@ -86,8 +89,8 @@ export default function Home() {
           </div>
 
           {/* Featured Product */}
-          <div className="font-semibold text-[32px] mt-10">Featured Product</div>
-          <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
+          <div className="font-semibold text-center md:text-start text-[32px] mt-10">Featured Product</div>
+          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
             {featuredProduct.map((product, index) => (
               <div key={index} className=" p-1">
                 {" "}
@@ -110,8 +113,8 @@ export default function Home() {
           </div>
 
           {/* Category*/}
-          <div className="font-semibold text-[32px] mt-10">Top Categories</div>
-          <div className="flex items-center flex-wrap gap-4 mt-6 mb-24">
+          <div className="font-semibold text-center md:text-start text-[32px] mt-10">Top Categories</div>
+          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-4 mt-6 mb-24">
             {topCategories.map((product, index) => (
               <div key={index} className=" p-1">
                 {" "}
@@ -132,7 +135,7 @@ export default function Home() {
 
           {/* Explore NEW */}
         
-    <div className="container  py-2  lg:pt-24 relative">
+    <div className="container px-5 md:px-0 py-2  lg:pt-24 relative">
 
     <div className="flex absolute left-[-180px] top-80">
   <h1 className="text-2xl rotate-90">Explore new and popular styles</h1>
@@ -201,9 +204,8 @@ export default function Home() {
     
           {/* Our Product */}
 
-               {/* Featured Product */}
-               <div className="font-semibold text-[32px] mt-10 text-center">Featured Product</div>
-          <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
+               <div className="font-semibold text-[32px] mt-10 text-center">Our Product</div>
+          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
             {ourProduct.map((product, index) => (
               <div key={index} className=" p-1">
                 {" "}

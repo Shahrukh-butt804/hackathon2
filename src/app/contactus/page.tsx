@@ -27,11 +27,11 @@ export default function page() {
     <>
     <div>
         <div className='flex flex-col justify-center items-center gap-5 mt-10 '>
-            <h1 className='text-4xl font-bold'>Get In Touch With Us</h1>
-            <p className='w-[644px] text-slate-500'>For More Information About Our Product & Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!</p>
+            <h1 className='text-2xl md:text-4xl font-bold'>Get In Touch With Us</h1>
+            <p className='w-[344px] md:w-[644px] text-slate-500'>For More Information About Our Product & Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!</p>
         </div>
 
-        <div className='flex justify-center items-start gap-24'>
+        <div className='flex flex-col md:flex-row px-6 md:px-0 justify-center items-start gap-24'>
             <div className='w-[300px] flex pt-8   lg:pt-12 flex-col gap-10 '>
 
             <div className='flex items-start gap-5'>
@@ -63,7 +63,7 @@ export default function page() {
 
             {/* Form */}
                 
-            <div className="rounded-lg w-[500px]  p-8  lg:col-span-3 lg:p-12">
+            <div className="rounded-lg w-[350px] md:w-[500px]  lg:col-span-3 lg:p-12">
         <form action="#" className="space-y-10">
 
 
@@ -133,9 +133,9 @@ export default function page() {
           {/* Cards */}
 
           <div className='flex justify-center items-center'>
-          <div className='bg-slate-100 w-[1000px] flex justify-center py-20 px-5 items-center gap-20 mb-24'>
+          <div className='bg-slate-100 w-[380px] mt-10 md:mt-0 md:w-[1000px] flex flex-col md:flex-row justify-center py-20 md:px-5 items-start md:items-center gap-20 md:mb-24'>
             {data.map((data,index)=>(
-                <div key={index} className='flex gap-3 items-start'>
+                <div key={index} className='flex gap-5 md:gap-3 justify-center md:justify-normal items-center md:items-start'>
                     <Image src={data.image} alt='image' width={80} height={80}/>
                     <div>
                         <h1 className='text-xl font-bold'>{data.heading}</h1>
