@@ -1,101 +1,239 @@
+"use client"
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { MoveRight, ShoppingCart } from "lucide-react";
+import Footer from "@/components/Footer";
+import { useRouter } from "next/navigation";
+
+const logos = [
+  { image: "/l1.png" },
+  { image: "/l2.png" },
+  { image: "/l3.png" },
+  { image: "/l4.png" },
+  { image: "/l5.png" },
+  { image: "/l6.png" },
+  { image: "/l7.png" },
+];
+
+const featuredProduct = [
+  {
+    image: "/fp1.png",
+    name: "Library Stool Chair",
+    price: 20,
+  },
+  {
+    image: "/fp2.png",
+    name: "Library Stool Chair",
+    price: 20,
+  },
+  { image: "/fp3.png", name: "Library Stool Chair", price: 20 },
+  { image: "/fp4.png", name: "Library Stool Chair", price: 20 },
+];
+
+const topCategories = [
+  { image: "/tc1.png" },
+  { image: "/tc2.png" },
+  { image: "/tc3.png" },
+];
+
+const ourProduct = [
+  {
+    image: "/op1.png",
+    name: "Library Stool Chair",
+    price: 20,
+  },
+  {
+    image: "/op2.png",
+    name: "Library Stool Chair",
+    price: 20,
+  },
+  { image: "/op3.png", name: "Library Stool Chair", price: 20 },
+  { image: "/op4.png", name: "Library Stool Chair", price: 20 },
+  { image: "/op5.png", name: "Library Stool Chair", price: 20 },
+  { image: "/op6.png", name: "Library Stool Chair", price: 20 },
+  { image: "/op7.png", name: "Library Stool Chair", price: 20 },
+  { image: "/op8.png", name: "Library Stool Chair", price: 20 },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  const router = useRouter()
+
+  return (
+    <>
+      <div className="px-[300px] flex justify-center items-center ">
+        <div className="bg-[url('/herobg.png')] w-full rouded-lg mt-3 bg-cover bg-center h-screen">
+          <div className="flex flex-col gap-4 px-10 justify-center h-full items-start  ">
+            <p className="text-slate-700">Welcome to chairy</p>
+            <p className="font-bold text-[55px] w-[530px] h-[198px] tracking-tight leading-none">
+              Best Furniture Collection for your interior.
+            </p>
+            <Button
+            onClick={()=> router.push("/allproducts")}
+            className="bg-[#029FAE] text-white">
+              {" "}
+              shop Now <MoveRight />
+            </Button>
+          </div>
+
+          <div className="flex items-center flex-wrap gap-5 mt-6">
+            {logos.map((logo, index) => (
+              <div className=" p-1">
+                {" "}
+                <Image src={logo.image} alt="image" width={100} height={100} />
+              </div>
+            ))}
+          </div>
+
+          {/* Featured Product */}
+          <div className="font-semibold text-[32px] mt-10">Featured Product</div>
+          <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
+            {featuredProduct.map((product, index) => (
+              <div className=" p-1">
+                {" "}
+                <Image
+                  src={product.image}
+                  alt="image"
+                  width={210}
+                  height={220}
+                />
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col gap-0">
+                    <h1 className="text-md hover:text-[#029FAE]">{product.name}</h1>
+                    <h1 className="font-bold">${product.price}</h1>
+                  </div>
+
+                  <ShoppingCart className="hover:bg-[#029FAE] hover:text-white bg-slate-200 rounded-sm p-[2px]" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Category*/}
+          <div className="font-semibold text-[32px] mt-10">Top Categories</div>
+          <div className="flex items-center flex-wrap gap-4 mt-6 mb-24">
+            {topCategories.map((product, index) => (
+              <div className=" p-1">
+                {" "}
+                <Image
+                key={index}
+                  src={product.image}
+                  alt="image"
+                  width={280}
+                  height={280}
+                />
+              </div>
+            ))}
+          </div>
+
+
+
+
+
+          {/* Explore NEW */}
+        
+    <div className="container  py-2  lg:pt-24 relative">
+
+    <div className="flex absolute left-[-180px] top-80">
+  <h1 className="text-2xl rotate-90">Explore new and popular styles</h1>
+</div>
+
+    <div className="-m-1 flex flex-wrap md:-m-2">
+
+    <div className="flex w-full md:w-1/2 flex-wrap">
+      <div className="w-full p-1 md:p-2">
+      <Image
+          alt="gallery"
+          className="block h-full w-full rounded-lg object-cover object-center"
+          src={"/en1.png"}
+          width={100}
+          height={100} />
+      </div>
+    
+     
     </div>
+
+    <div className="flex w-full md:w-1/2 flex-wrap">
+      <div className="w-full md:w-1/2 p-1 md:p-2">
+      <Image
+          alt="gallery"
+          className="block h-full w-full rounded-lg object-cover object-center"
+          src={"/en2.png"}
+          width={100}
+          height={100} />
+      </div>
+
+      <div className="w-full md:w-1/2 p-1 md:p-2">
+      <Image
+          alt="gallery"
+          className="block h-full w-full rounded-lg object-cover object-center"
+          src={"/en3.png"}
+          width={100}
+          height={100} />
+      </div>
+
+
+
+      <div className="w-full md:w-1/2 p-1 md:p-2">
+        <Image
+          alt="gallery"
+          className="block h-full w-full rounded-lg object-cover object-center"
+          src={"/en4.png"}
+          width={100}
+          height={100} />
+      </div>
+      <div className="w-full md:w-1/2 p-1 md:p-2">
+        <Image
+          alt="gallery"
+          className="block h-full w-full rounded-lg object-cover object-center"
+          src={"/en5.png"}
+          width={100}
+          height={100} />
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+    </div>
+    
+          {/* Our Product */}
+
+               {/* Featured Product */}
+               <div className="font-semibold text-[32px] mt-10 text-center">Featured Product</div>
+          <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
+            {ourProduct.map((product, index) => (
+              <div className=" p-1">
+                {" "}
+                <Image
+                  src={product.image}
+                  alt="image"
+                  width={210}
+                  height={220}
+                />
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col gap-0">
+                    <h1 className="text-md hover:text-[#029FAE]">{product.name}</h1>
+                    <h1 className="font-bold">${product.price}</h1>
+                  </div>
+
+                  <ShoppingCart className="hover:bg-[#029FAE] hover:text-white bg-slate-200 rounded-sm p-[2px]" />
+                </div>
+              </div>
+            ))}
+          </div>
+    
+    
+    
+    
+
+    
+    <Footer/>
+    </div>
+      </div>
+    
+    </>
   );
 }
