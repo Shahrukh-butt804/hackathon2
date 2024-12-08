@@ -57,7 +57,7 @@ const product = [
     { image: "/op4.png", name: "Library Stool Chair", price: 20 },
 ]
 
-export default function page() {
+export default function Page() {
     const router = useRouter()
   return (
       <>

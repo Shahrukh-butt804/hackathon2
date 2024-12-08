@@ -135,7 +135,7 @@ export default function page() {
           <div className='flex justify-center items-center'>
           <div className='bg-slate-100 w-[1000px] flex justify-center py-20 px-5 items-center gap-20 mb-24'>
             {data.map((data,index)=>(
-                <div className='flex gap-3 items-start'>
+                <div key={index} className='flex gap-3 items-start'>
                     <Image src={data.image} alt='image' width={80} height={80}/>
                     <div>
                         <h1 className='text-xl font-bold'>{data.heading}</h1>

@@ -89,7 +89,7 @@ export default function Home() {
           <div className="font-semibold text-[32px] mt-10">Featured Product</div>
           <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
             {featuredProduct.map((product, index) => (
-              <div className=" p-1">
+              <div key={index} className=" p-1">
                 {" "}
                 <Image
                   src={product.image}
@@ -113,7 +113,7 @@ export default function Home() {
           <div className="font-semibold text-[32px] mt-10">Top Categories</div>
           <div className="flex items-center flex-wrap gap-4 mt-6 mb-24">
             {topCategories.map((product, index) => (
-              <div className=" p-1">
+              <div key={index} className=" p-1">
                 {" "}
                 <Image
                 key={index}
@@ -205,7 +205,7 @@ export default function Home() {
                <div className="font-semibold text-[32px] mt-10 text-center">Featured Product</div>
           <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
             {ourProduct.map((product, index) => (
-              <div className=" p-1">
+              <div key={index} className=" p-1">
                 {" "}
                 <Image
                   src={product.image}

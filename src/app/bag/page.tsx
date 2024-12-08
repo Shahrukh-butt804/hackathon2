@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 
-export default function page() {
+export default function Page() {
   const router = useRouter();
   return (
     <>
