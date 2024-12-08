@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 
 const product = [
@@ -31,8 +30,7 @@ const product = [
 
 ];
 
-export default function page() {
-  const router = useRouter();
+export default function Page() {
   return (
     <>
       <section className="my-20">
@@ -78,7 +76,7 @@ export default function page() {
 
         <div className="flex items-center flex-wrap gap-7 text-[#16808b] mt-6 mb-24">
           {product.map((product, index) => (
-            <div className="w-52   h-44 bg-gray-200  p-5">
+            <div key={index} className="w-52   h-44 bg-gray-200  p-5">
               {" "}
               <Image src={product.image} alt="image" width={24} height={24} />
               <div className="flex flex-col gap-2 mt-2">

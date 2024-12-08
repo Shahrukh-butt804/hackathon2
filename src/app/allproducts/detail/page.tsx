@@ -76,7 +76,7 @@ export default function Page() {
 
       <div className="flex items-center flex-wrap gap-4 mt-6 mb-24">
         {product.map((product, index) => (
-          <div className=" p-1">
+          <div key={index} className=" p-1">
             {" "}
             <Image
               src={product.image}

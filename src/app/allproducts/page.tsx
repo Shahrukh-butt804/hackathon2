@@ -66,7 +66,7 @@ export default function Page() {
       <div className="font-semibold text-[32px] mt-10">All products</div>
       <div className="flex items-center flex-wrap gap-3 mt-6 mb-24">
         {featuredProduct.map((product, index) => (
-          <div className=" p-1">
+          <div key={index} className=" p-1">
             {" "}
             <Image
               src={product.image}
@@ -123,7 +123,7 @@ export default function Page() {
         
         <div className="flex px-[300px] items-center flex-wrap gap-3 mt-6 mb-24">
         {product.map((product, index) => (
-          <div className=" p-1">
+          <div key={index} className=" p-1">
             {" "}
             <Image
               src={product.image}
