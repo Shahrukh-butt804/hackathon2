@@ -67,9 +67,9 @@ export default function Page() {
     </div>
   </section>
 
-        <div className='md:px-[300px]'>
+        <div className='md:px-10 lg:px-[300px]'>
         
-        <div className='flex justify-center gap-12 md:gap-0 md:justify-between items-center mb-10'>
+        <div className='flex justify-center gap-12 md:justify-between items-center mb-10'>
         <p className=" font-semibold text-[28px] mt-10">Featured Product</p>
         <p className=" font-semibold underline text-[16px] mt-10">View All</p>
         </div>

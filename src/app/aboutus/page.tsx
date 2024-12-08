@@ -38,7 +38,7 @@ export default function Page() {
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-start md:gap-2"
           >
-            <div className="w-full flex flex-col justify-between h-[454px] bg-[#007580] text-white">
+            <div className="w-full flex flex-col justify-between md:h-[380px] lg:h-[454px] bg-[#007580] text-white">
 
 
               <div className="flex flex-col gap-5 p-5">
@@ -69,7 +69,7 @@ export default function Page() {
         </div>
       </section>
 
-      <div className="md:px-[300px]">
+      <div className="md:px-10 lg:px-[300px]">
         <p className=" font-semibold text-[24px] md:text-[28px] text-center md:mt-10">
           What makes our Brand Different
         </p>
@@ -92,12 +92,12 @@ export default function Page() {
           {/* Our Product */}
 
           <section className="">
-            <h1 className="md:px-[300px] text-center md:text-start text-2xl font-bold">Our Popular Products </h1>
+            <h1 className="lg:px-[300px] text-center lg:text-start text-2xl font-bold">Our Popular Products </h1>
         <div className=" mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-[180px]">
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-start md:gap-2"
           >
-            <div className="w-full flex  flex-col gap-3 md:h-[454px] ">
+            <div className="w-full flex  flex-col gap-3  md:h-[454px] ">
 
             <Image
                 src={"/opp1.png"}

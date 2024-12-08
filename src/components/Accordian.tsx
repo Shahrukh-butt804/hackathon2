@@ -73,7 +73,7 @@ const Accordion = () => {
   ];
 
   return (
-    <div className="flex flex-wrap gap-10">
+    <div className="flex justify-center lg:justify-normal flex-wrap gap-10">
       {items.map((item, index) => (
         <div className="w-[430px]" key={index}>
           <AccordionItem

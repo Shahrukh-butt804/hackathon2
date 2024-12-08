@@ -6,7 +6,7 @@ import { MoveRight} from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-50 text-slate-600 md:ps-[300px] font-thin w-full absolute left-0 ">
+    <footer className="bg-slate-50 text-slate-600 lg:ps-[300px] font-thin w-full absolute left-0 ">
       <div className="mx-auto max-w-screen-xl px-4 pb-5 pt-16 sm:px-6 lg:px-0">
         <div className="flex items-center">
           <div className="mt-8 grid grid-cols-2 gap-5 lg:mt-0 lg:grid-cols-6 lg:gap-y-16">

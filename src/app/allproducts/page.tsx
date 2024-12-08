@@ -61,9 +61,10 @@ export default function Page() {
     const router = useRouter()
   return (
       <>
-    <div className="md:px-[300px] my-24 ">
+    <div className="px-10 lg:px-[300px] my-24 ">
       {/* All products */}
       <div className="font-semibold text-center md:text-start text-[32px] mt-10">All products</div>
+      
       <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
         {featuredProduct.map((product, index) => (
           <div key={index} className=" p-1">
@@ -121,7 +122,7 @@ export default function Page() {
 
         <div className="font-semibold text-3xl text-center mt-20">Follow products and discounts on Instagram</div>
         
-        <div className="flex md:px-[300px] items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
+        <div className="flex px-10 lg:px-[300px] items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
         {product.map((product, index) => (
           <div key={index} className=" p-1">
             {" "}

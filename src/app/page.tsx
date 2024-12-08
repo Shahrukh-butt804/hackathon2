@@ -61,7 +61,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="md:px-[300px] flex justify-center items-center ">
+      <div className="md:px-5 lg:px-[300px] flex justify-center items-center ">
         <div className="md:bg-[url('/herobg.png')] w-full rouded-lg mt-3 bg-cover bg-center md:h-screen">
           <div className="flex flex-col gap-2 md:gap-4 px-10 mt-10 md:mt-0 md:justify-center h-full items-start  ">
             <p className="text-slate-700">Welcome to chairy</p>

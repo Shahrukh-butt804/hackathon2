@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className="px-5 md:px-[300px] mb-24">
+    <div className="px-5 md:px-10 lg:px-[300px] mb-24">
       
           <div className='flex flex-col justify-center items-center gap-5 mt-10 '>
             <h1 className='text-2xl md:text-4xl font-bold'>Questions Looks Here</h1>

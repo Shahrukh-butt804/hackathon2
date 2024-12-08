@@ -11,9 +11,9 @@ export default function Page() {
   const router = useRouter();
   return (
     <>
-    <section className="px-5 md:px-[300px] mb-2 md:mb-24">
+    <section className="px-5 md:px-10 lg:px-[300px] mb-2 md:mb-24">
       <div className="mx-auto max-w-screen-xl  py-8 ">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:items-center md:gap-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 md:items-center md:gap-10">
           <div className="md:col-span-3 ">
             <h1 className="my-5 text-xl font-semibold">Bag</h1>
 
@@ -83,7 +83,7 @@ export default function Page() {
               </div>
               <hr className="h-[1.5px] bg-slate-500" />
 
-             <div className="text-center">
+             <div className="text-center md:text-start lg:text-center">
              <Button
                 onClick={() => router.push("/bag")}
                 className="bg-[#029FAE] w-52 p-5 mt-5  rounded-full text-white"
