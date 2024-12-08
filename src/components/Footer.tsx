@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { MoveRight,Facebook,  } from "lucide-react";
+import { MoveRight} from "lucide-react";
 
 export default function Footer() {
   return (

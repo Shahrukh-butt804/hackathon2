@@ -78,7 +78,7 @@ export default function Home() {
 
           <div className="flex items-center flex-wrap gap-5 mt-6">
             {logos.map((logo, index) => (
-              <div className=" p-1">
+              <div key={index} className=" p-1">
                 {" "}
                 <Image src={logo.image} alt="image" width={100} height={100} />
               </div>
