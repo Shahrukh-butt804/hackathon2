@@ -1,31 +1,5 @@
 import sanityClient from './sanityClient';
 
-// export default async function getPosts() {
-//   const query = `*[_type == "product"] | order(publishedAt desc) {
-//     title,
-//     slug,
-//     mainImage {
-//       asset -> {
-//         _id,
-//         url
-//       },
-//       alt
-//     },
-//     publishedAt,
-//     body
-//   }`;
-
-//   try {
-//     const posts = await sanityClient.fetch(query);
-//     return posts;
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//     return [];
-//   }
-// }
-
-
-
 export const getStaticPropsCategories = async () => {
     try {
       const query = '*[_type == "categories"]';
@@ -38,6 +12,7 @@ export const getStaticPropsCategories = async () => {
         revalidate: 10, // Re-generate page every 10 seconds
       };
     } catch (error) {
+      console.error("Error fetching Categories", error);
       return {
         notFound: true,
       };
@@ -56,6 +31,7 @@ export const getStaticPropsAllData = async () => {
         revalidate: 10, // Re-generate page every 10 seconds
       };
     } catch (error) {
+      console.error("Error fetching product", error)
       return {
         notFound: true,
       };

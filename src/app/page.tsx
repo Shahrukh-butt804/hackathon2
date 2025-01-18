@@ -33,31 +33,6 @@ const featuredProduct = [
   { image: "/fp4.png", name: "Library Stool Chair", price: 20 },
 ];
 
-const topCategories = [
-  { image: "/tc1.png" },
-  { image: "/tc2.png" },
-  { image: "/tc3.png" },
-];
-
-const ourProduct = [
-  {
-    image: "/op1.png",
-    name: "Library Stool Chair",
-    price: 20,
-  },
-  {
-    image: "/op2.png",
-    name: "Library Stool Chair",
-    price: 20,
-  },
-  { image: "/op3.png", name: "Library Stool Chair", price: 20 },
-  { image: "/op4.png", name: "Library Stool Chair", price: 20 },
-  { image: "/op5.png", name: "Library Stool Chair", price: 20 },
-  { image: "/op6.png", name: "Library Stool Chair", price: 20 },
-  { image: "/op7.png", name: "Library Stool Chair", price: 20 },
-  { image: "/op8.png", name: "Library Stool Chair", price: 20 },
-];
-
 export default function Home() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
