@@ -36,7 +36,6 @@ export default function Page() {
       getProductById(productId)
       .then(res => {
         setProducts(res)
-        console.log(res)
       });
 
     }
