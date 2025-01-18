@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { ShoppingCart } from "lucide-react";
 import Footer from "@/components/Footer";
-import { useRouter } from "next/navigation";
 import { getStaticPropsAllData } from "@/lib/getPost";
 import { urlFor } from "@/lib/sanityClient";
-import Spinner from "@/components/spinner";
+import { ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Spinner from "../../components/Spinner";
 const product = [
   { image: "/op7.png", name: "Library Stool Chair", price: 20 },
   { image: "/op5.png", name: "Library Stool Chair", price: 20 },

@@ -1,13 +1,13 @@
 "use client"
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { MoveRight, ShoppingCart } from "lucide-react";
 import Footer from "@/components/Footer";
-import { useRouter } from "next/navigation";
-import {getStaticPropsCategories,getStaticPropsAllData} from "../lib/getPost";
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { urlFor } from "@/lib/sanityClient";
-import Spinner from "@/components/spinner";
+import { MoveRight, ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Spinner from "../components/Spinner";
+import { getStaticPropsAllData, getStaticPropsCategories } from "../lib/getPost";
 const logos = [
   { image: "/l1.png" },
   { image: "/l2.png" },

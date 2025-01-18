@@ -1,14 +1,14 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import {ShoppingCart } from 'lucide-react'
-import { useRouter, useSearchParams } from 'next/navigation'
 import Footer from '@/components/Footer'
+import { Button } from '@/components/ui/button'
 import { getProductById } from '@/lib/getPost'
 import { urlFor } from '@/lib/sanityClient'
-import Spinner from '@/components/spinner'
+import { ShoppingCart } from 'lucide-react'
+import Image from 'next/image'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import Spinner from '../../../components/Spinner'
 
 
 const FeaturedProduct = [
