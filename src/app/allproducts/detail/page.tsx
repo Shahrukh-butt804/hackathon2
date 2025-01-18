@@ -8,7 +8,7 @@ import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Spinner from '../../../components/Spinner'
+import Spinner from '../../../components/SpinnerTAIL'
 
 
 const FeaturedProduct = [

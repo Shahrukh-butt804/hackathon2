@@ -6,7 +6,7 @@ import { MoveRight, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/SpinnerTAIL";
 import { getStaticPropsAllData, getStaticPropsCategories } from "../lib/getPost";
 const logos = [
   { image: "/l1.png" },
