@@ -1,14 +1,17 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import {ShoppingCart } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Footer from '@/components/Footer'
+import { getProductById } from '@/lib/getPost'
+import { urlFor } from '@/lib/sanityClient'
+import Spinner from '@/components/spinner'
 
 
-const product = [
+const FeaturedProduct = [
     { image: "/op7.png", name: "Library Stool Chair", price: 20 },
     { image: "/op5.png", name: "Library Stool Chair", price: 20 },
 
@@ -24,36 +27,48 @@ const product = [
 
 export default function Page() {
     const router=useRouter()
+    const searchParams = useSearchParams();
+    const productId = searchParams.get('productId');
+    const [product,setProducts] = useState<any>("")
+
+   useEffect(() => {
+    if (productId) {
+      getProductById(productId)
+      .then(res => {
+        setProducts(res)
+        console.log(res)
+      });
+
+    }
+    }, [productId]) 
+
+
   return (
 
     <>
     <section className='my-2 md:my-20'>
     <div className=" mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-[180px]">
+      {product ? (
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-start md:gap-10">
 
       <div>
-          <Image
-            src={"/sofa.png"}
-            className="rounded"
-            alt="sofa"
-            width={500}
-            height={500}
-
-          />
+           <img
+                src={urlFor(product?.image)?.url()} 
+                alt="image"
+                className='w-full'
+              />
         </div>
 
 
         <div>
           <div className="max-w-lg md:max-w-none flex flex-col gap-5">
             <h2 className="text-3xl w-80 font-bold text-gray-900 sm:text-3xl lg:text-5xl">
-            Library Stool Chair
+            {product?.title}
             </h2>
-            <div className='w-28 p-1 rounded-full px-1 text-center bg-[#049eaf]  text-white'>$20.00 USD</div>
+            <div className='w-28 p-1 rounded-full px-1 text-center bg-[#049eaf]  text-white'>$ {product?.price} USD</div>
   
             <p className="mt-5 text-gray-700">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur doloremque saepe
-              architecto maiores repudiandae amet perferendis repellendus, reprehenderit voluptas
-              sequi.
+              {product?.description}
             </p>
             <Button
             onClick={()=> router.push("/bag")} className="bg-[#029FAE] w-28 px-2 text-white">
@@ -64,6 +79,13 @@ export default function Page() {
   
    
       </div>
+          )
+          :
+          <div className='absolute top-0 text-center'>
+          <Spinner />
+          </div>
+          }
+
     </div>
   </section>
 
@@ -75,7 +97,7 @@ export default function Page() {
         </div>
 
       <div className="flex items-center justify-center md:justify-normal flex-wrap gap-4 mt-6 mb-24">
-        {product.map((product, index) => (
+        {FeaturedProduct.map((product, index) => (
           <div key={index} className=" p-1">
             {" "}
             <Image
