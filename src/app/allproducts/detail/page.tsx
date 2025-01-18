@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Spinner from '../../../components/SpinnerTAIL'
-
+import { Suspense } from 'react';
 
 const FeaturedProduct = [
     { image: "/op7.png", name: "Library Stool Chair", price: 20 },
@@ -25,7 +25,7 @@ const FeaturedProduct = [
 ]
 
 
-export default function Page() {
+ function ProductDetailPage() {
     const router=useRouter()
     const searchParams = useSearchParams();
     const productId = searchParams.get('productId');
@@ -118,4 +118,13 @@ export default function Page() {
             <Footer/>
   </>
   )
+}
+
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductDetailPage />
+    </Suspense>
+  );
 }

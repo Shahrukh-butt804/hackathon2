@@ -6,7 +6,7 @@ const sanityClient = createClient({
   projectId: '13h586qu', // Replace with your Sanity project ID
   dataset: 'production',       // Replace with your dataset name
   useCdn: true,                // `true` for faster response, `false` if you need the latest data
-    //   apiVersion: '2023-01-01',    // Use the latest API version
+      apiVersion: '2023-01-01',    // Use the latest API version
     // token:'sk54kJmg7iwLaSpTn1YmQRwfADt9CpliRms0hs21NT5jkiMQBFYz9Y0oFs4lFsyRKorbHaJ3RO6O7PcxBKNotGhmgoNNxC1hvMXLnKMDI6g2gM83QMI45dtFSidYRuuE49BY7DpirH4Uo5ZxkHfl6c4xOz8DljpI0cwpdmTYnigdFuCkcRST', //
 });
 
