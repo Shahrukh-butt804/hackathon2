@@ -114,7 +114,7 @@ export default function Home() {
           {/* Category*/}
           <div className="font-semibold text-center md:text-start text-[32px] mt-10">Top Categories</div>
           <div className="flex items-center justify-center md:justify-normal flex-wrap gap-2 mt-6 mb-24">
-            {categories.length> 0 && categories.map((product:any, index) => (
+            {categories.length> 0 ? categories.map((product:any, index) => (
                    <div key={index} className="max-w-[298px] p-1 ">
                    {" "}
                    <img
@@ -137,7 +137,12 @@ export default function Home() {
    
                    </div>
                  </div>
-            ))}
+            ))
+            :
+            <div className='absolute '>
+            <Spinner />
+            </div>
+            }
           </div>
 
 
