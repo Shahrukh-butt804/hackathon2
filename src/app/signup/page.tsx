@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <section>
-      <div className=" max-w-screen-xl px-3 py-8 sm:px-6 lg:px-0">
+      <div className=" max-w-screen-xl px-3 py-8 sm:px-6  lg:px-0">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-0">
           <div className="md:col-span-3">
             <img
@@ -50,7 +50,16 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col gap-4 max-w-lg md:max-w-none">
+          <div className="flex flex-col gap-4 max-w-lg md:max-w-none self-start">
+            
+          <div className="flex justify-center mt-2 mb-5 md:mb-16 md:mt-6 flex-col items-center gap-0">
+                <h1 className="mt-4 text-3xl tracking-wider md:text-5xl font-bold">
+                  COMFORTY
+                </h1>
+                <p className="text-xs md:text-sm tracking-wide whitespace-nowrap font-semibold">
+                  Wide Selection of Premium Sofas And Chairs
+                </p>
+            </div>
             <div className="flex flex-col gap-3">
               <h2 className="text-2xl flex  font-semibold text-gray-900 sm:text-3xl">
                 Create an account
