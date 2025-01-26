@@ -71,7 +71,7 @@ async function signup(user) {
         title: "Success!",
         text: "User Created successfully",
         icon: "success",
-        confirmButtonText: "Cool",
+        confirmButtonText: "Okay",
       });
       console.log('Created User:', newUser);
       return true;
@@ -131,7 +131,7 @@ async function login(user) {
           title: "Success!",
           text: "Logged In successfully",
           icon: "success",
-          confirmButtonText: "Cool",
+          confirmButtonText: "Okay",
         });
       // console.log('Logged in User:', existingUser);
       return existingUser;
@@ -150,7 +150,7 @@ async function login(user) {
 
 async function addToCart(userId, productId) {
   try {
-    // Fetch the cart for the user, if it exists
+    // Fetch the existing cart for the user
     const existingCart = await sanityClientforSignUP.fetch(
       `*[_type == "cart" && user._ref == $userId][0]`,
       { userId }
@@ -158,68 +158,103 @@ async function addToCart(userId, productId) {
 
     if (!existingCart) {
       // If no cart exists for the user, create a new one
-      const newCart = await sanityClientforSignUP.create({
-        _type: 'cart',
+      await sanityClientforSignUP.create({
+        _type: "cart",
         user: { _ref: userId },
         items: [{ _ref: productId }],
-        totalPrice: 0,  // This will be updated after calculating total
+        totalPrice: 0, // This will be updated after calculating total
         createdAt: new Date().toISOString(),
       });
 
-      // alert('Cart created and product added!');
-      // console.log('Created Cart:', newCart);
+      Swal.fire({
+        title: "Success!",
+        text: "Cart created and product added!",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
     } else {
-      // If cart exists, add product to the existing items
-      const updatedCart = await sanityClientforSignUP
+      // If cart exists, check if the product already exists in the cart
+      const productExists = existingCart.items.some((item) => item._ref === productId);
+
+      if (productExists) {
+        Swal.fire({
+          title: "Already in Cart!",
+          text: "This product is already in your cart.",
+          icon: "info", // Info icon to indicate no action was taken
+          confirmButtonText: "Okay",
+        });
+        return false; // No further action needed
+      }
+
+      // Add the product to the existing cart if it doesn't exist
+      await sanityClientforSignUP
         .patch(existingCart._id)
         .setIfMissing({ items: [] })
-        .append('items', [{ _ref: productId }])
+        .append("items", [{ _ref: productId }])
         .commit();
 
-      // alert('Product added to the existing cart!');
-      // console.log('Updated Cart:', updatedCart);
+      Swal.fire({
+        title: "Success!",
+        text: "Product successfully added to your cart!",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
     }
 
-    // Fetch updated cart and calculate total price
-    // const updatedCart = await sanityClientforSignUP.fetch(
-    //   `*[_type == "cart" && user._ref == $userId][0]`,
-    //   { userId }
-    // );
-
-    // const products = await Promise.all(
-    //   updatedCart.items.map(async (item) => {
-    //     const product = await sanityClientforSignUP.fetch(
-    //       `*[_type == "product" && _id == $productId][0]`,
-    //       { productId: item._ref }
-    //     );
-    //     console.log('Product:', product?.price);
-    //     return product?.price || 0;  // Assuming the product has a price field
-    //   })
-    // );
-
-    // const totalPrice = products.reduce((acc, price) => acc + price, 0);
-
-    // Update cart with the total price
-    // await sanityClientforSignUP.patch(updatedCart._id).set({ totalPrice }).commit();
-
-    // alert('Cart updated Successfully');
-    Swal.fire({
-      title: "Success!",
-      text: "Cart updated successfully",
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-    return true 
+    return true;
   } catch (error) {
-    console.error('Error adding to cart:', error);
+    console.error("Error adding to cart:", error);
+
     Swal.fire({
       title: "Error!",
-      text: error.message || "Something went wrong. Please try again.", 
-      icon: "error", // Change the icon to "error"
+      text: error.message || "Something went wrong. Please try again.",
+      icon: "error",
       confirmButtonText: "Okay",
     });
+
+    return false;
   }
 }
-  
-export { addToCart, login, signup };
+async function clearCart(userId) {
+  try {
+    // Fetch the existing cart for the user
+    const existingCart = await sanityClientforSignUP.fetch(
+      `*[_type == "cart" && user._ref == $userId][0]`,
+      { userId }
+    );
+
+    if (!existingCart) {
+      Swal.fire({
+        title: "Cart Not Found!",
+        text: "You don't have a cart to clear.",
+        icon: "info",
+        confirmButtonText: "Okay",
+      });
+      return false; // No cart exists for the user
+    }
+
+    // Clear the cart items and reset total price to 0
+    await sanityClientforSignUP
+      .patch(existingCart._id)
+      .set({ items: [], totalPrice: 0 }) // Empty the cart and reset price
+      .commit();
+
+
+    return true;
+  } catch (error) {
+    console.error("Error clearing cart:", error);
+
+    Swal.fire({
+      title: "Error!",
+      text: error.message || "Something went wrong while clearing the cart.",
+      icon: "error",
+      confirmButtonText: "Okay",
+    });
+
+    return false;
+  }
+}
+
+
+export { addToCart, login, signup ,clearCart};
 
