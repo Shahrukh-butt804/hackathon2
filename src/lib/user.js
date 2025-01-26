@@ -220,7 +220,7 @@ async function clearCart(userId) {
     // Fetch the existing cart for the user
     const existingCart = await sanityClientforSignUP.fetch(
       `*[_type == "cart" && user._ref == $userId][0]`,
-      { userId }
+      { userId: userId }
     );
 
     if (!existingCart) {
@@ -234,7 +234,7 @@ async function clearCart(userId) {
     }
 
     // Clear the cart items and reset total price to 0
-    await sanityClientforSignUP
+       await sanityClientforSignUP
       .patch(existingCart._id)
       .set({ items: [], totalPrice: 0 }) // Empty the cart and reset price
       .commit();
@@ -255,6 +255,32 @@ async function clearCart(userId) {
   }
 }
 
+async function fetchCartsByUserId (userId) {
+  try {
+    // Fetch all carts for the given userId
+    const userCarts = await sanityClientforSignUP.fetch(
+      `*[_type == "cart" && user._ref == $userId]`,
+      { userId }
+    );
 
-export { addToCart, login, signup ,clearCart};
+    if (userCarts.length === 0) {
+      return [];
+    }
+
+    return userCarts;
+
+  } catch (error) {
+    console.error('Error fetching carts:', error);
+    Swal.fire({
+      title: "Error!",
+      text: error.message || "Something went wrong. Please try again.", 
+      icon: "error",
+      confirmButtonText: "Okay",
+    });
+    return [];
+  }
+}
+
+
+export { addToCart, login, signup ,clearCart,fetchCartsByUserId};
 

@@ -98,7 +98,7 @@ export default function Home() {
                 "Create Account"
               )}
             </Button>
-            <div className="flex items-center justify-center gap-3 w-full h-[56px] hover:bg-slate-100 rounded-md border-[1px] border-black">
+            <div className="flex cursor-pointer items-center justify-center gap-3 w-full h-[56px] hover:bg-slate-100 rounded-md border-[1px] border-black">
               <Image src={"/google.png"} alt="google" width={24} height={24} />
               sign up with Google
             </div>

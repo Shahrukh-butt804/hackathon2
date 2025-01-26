@@ -3,13 +3,15 @@
 import Footer from "@/components/Footer";
 import Spinner from "@/components/SpinnerTAIL";
 import { Button } from "@/components/ui/button";
-import { fetchCartsByUserId, getProductById } from "@/lib/getPost";
+import { getProductById } from "@/lib/getPost";
+import { fetchCartsByUserId } from "@/lib/user";
 import { urlFor } from "@/lib/sanityClient";
 import { clearCart } from "@/lib/user";
 import { Heart, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useCart } from "../layout";
 export default function Page() {
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState<any>([]);
@@ -18,13 +20,13 @@ export default function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "{}") : {};
-
+  const {setTotalCarts}= useCart()
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetchCartsByUserId(user._id);
-      console.log("THE RESPONSE", res);
-      if (res.length > 0) {
+      // console.log("THE RESPONSE", res[0]?.items);
+      if (res[0]?.items.length > 0) {
         setCartItems(res[0]?.items);
       } else {
         setMessage("No Cart items found");
@@ -66,11 +68,9 @@ export default function Page() {
         text: "Your order has been placed successfully",
         icon: "success",
         confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push("/dashboard");
-        }
-      });
+      })
+        setTotalCarts(0)
+        router.push("/dashboard");
     }
   }
 

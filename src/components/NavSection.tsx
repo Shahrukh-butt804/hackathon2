@@ -9,17 +9,21 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter ,usePathname} from "next/navigation";
+import { useEffect, useState } from "react";
 import { Link as ScrollLink } from 'react-scroll';
 import Swal from "sweetalert2";
 
 export default function Home() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   
   const {totalCarts:cartItems} = useCart()
 
+  useEffect(() => {
+    setIsOpen(false);
+  },[pathname]);
 
   function handleLogOut() {
     Swal.fire({
@@ -135,27 +139,30 @@ export default function Home() {
         >
           <div className="flex flex-col items-center gap-[32px] font-bold text-[14px] text-slate-500">
             <h1
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/dashboard")}
               className="hover:text-[#007580] cursor-pointer"
             >
               Home
             </h1>
-            <h1 className="hover:text-[#007580] cursor-pointer">Shop</h1>
-            <h1 className="hover:text-[#007580] cursor-pointer">Product</h1>
+            <h1 className="hover:text-[#007580] cursor-pointer"><ScrollLink to="product-container" smooth={true} duration={500}
+          >Product</ScrollLink></h1>
             <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
             <h1
-              onClick={() => router.push("/contactus")}
-              className="hover:text-[#007580] cursor-pointer"
-            >
-              Contact us
-            </h1>
+            onClick={() => router.push("/dashboard/contactus")}
+            className="hover:text-[#007580] cursor-pointer"
+          >
+            Contact us
+          </h1>
 
-            <h1
-              onClick={() => router.push("/aboutus")}
-              className="hover:text-[#007580] cursor-pointer"
-            >
-              About us
-            </h1>
+          <h1
+            onClick={() => router.push("/dashboard/aboutus")}
+            className="hover:text-[#007580] cursor-pointer"
+          >
+            About us
+          </h1>
+          <h1
+           onClick={handleLogOut}
+          className="hover:text-[#007580] cursor-pointer">Log out</h1>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import NavSection from "@/components/NavSection";
-import { fetchCartsByUserId } from "@/lib/getPost";
+import { fetchCartsByUserId } from "@/lib/user";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
