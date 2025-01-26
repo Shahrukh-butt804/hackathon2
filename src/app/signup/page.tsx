@@ -24,19 +24,7 @@ export default function Home() {
       })
   }
 
-//  async function registerUser(){
-//     // console.log(user)
-//    try {
-//    const res= await axios.post(`${baseUrl}/user/register`,user)
-//    if (res.status == 200) {
-//       console.log(res)
-//    }else{
-//      console.log(res.data.message)
-//    }
-//    } catch (error) {
-//       console.log("Error while sending Request")
-//    }    
-//   }
+
 
   return (
     <section>
