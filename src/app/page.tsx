@@ -1,52 +1,50 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link"
+import { login } from "@/lib/user";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-// import axios from "axios";
-// import { baseUrl } from "@/constants/constants";
-
-// import {useDispatch } from "react-redux";
-// import { addUser } from "@/lib/userSlice/user";
-import { login } from "@/lib/user";
 
 export default function Home() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-  const router = useRouter()
-  const [user,setUser] = useState({
-    email : "",
-    password:"",
-  })
-
-  function handleChange(e:any){
-      setUser(prev => {
-        return {
-          ...prev,
-          [e.target.name] : e.target.value,
-        }
-      })
+  function handleChange(e: any) {
+    setUser((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
   }
 
   const handlelogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res=await login(user)
-    if(res){
-      router.push("/dashboard")
-      localStorage.setItem("user",JSON.stringify(res))
+    setLoading(true);
+    const res = await login(user);
+    setLoading(false);
+    if (res) {
+      router.push("/dashboard");
+      localStorage.setItem("user", JSON.stringify(res));
     }
   };
-
-
 
   return (
     <section>
       <div className=" max-w-screen-xl px-3 py-8 sm:px-6 lg:px-0">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-0">
           <div className="md:col-span-3">
-            <img src={"./op2.png"} 
-            width={800}
-            height={800}
-            className="rounded" alt="" />
+            <img
+              src={"./op2.png"}
+              width={800}
+              height={800}
+              className="rounded"
+              alt=""
+            />
           </div>
 
           <div className="flex flex-col gap-4 max-w-lg md:max-w-none">
@@ -59,7 +57,7 @@ export default function Home() {
 
             <div className="flex flex-col gap-4 mt-4">
               <input
-              onChange={handleChange}
+                onChange={handleChange}
                 className="border-none focus:outline-none"
                 type="text"
                 placeholder="Enter Your Email"
@@ -67,7 +65,7 @@ export default function Home() {
               />
               <hr className="h-[1.5px] bg-slate-500" />
               <input
-              onChange={handleChange}
+                onChange={handleChange}
                 className="border-none focus:outline-none"
                 type="password"
                 placeholder="Enter Your password"
@@ -75,15 +73,33 @@ export default function Home() {
               />
               <hr className="h-[1.5px] bg-slate-500" />
             </div>
-          <Link className="text-[#ed7f89] hover:text-[#d85560] text-[16px]" href="/signup">don't you have an account?</Link>
-          <div className="flex items-center justify-between">
-            <Button 
-            onClick={handlelogin}
-            className="bg-[#ed7f89] hover:bg-[#d85560] text-white w-[143px] h-[56px]">Login</Button>
-            <a className="underline text-[#ed7f89] hover:text-[#d85560] text-[16px]" href="#">Forgot Password?</a>
-          </div>
-      
-
+            <Link
+              className="text-[#ed7f89] hover:text-[#d85560] text-[16px]"
+              href="/signup"
+            >
+              don't you have an account?
+            </Link>
+            <div className="flex items-center justify-between">
+              <Button
+                onClick={handlelogin}
+                className="bg-[#ed7f89] hover:bg-[#d85560] text-white w-[143px] h-[56px]"
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center min-h-screen">
+                    <div className="w-5 h-5 border-4 border-white border-dashed rounded-full animate-spin"></div>
+                  </div>
+                ) : (
+                  "Login"
+                )}
+               
+              </Button>
+              <a
+                className="underline text-[#ed7f89] hover:text-[#d85560] text-[16px]"
+                href="#"
+              >
+                Forgot Password?
+              </a>
+            </div>
           </div>
         </div>
       </div>

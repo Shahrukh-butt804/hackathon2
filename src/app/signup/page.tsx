@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,43 +6,48 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 // import axios from "axios";
 // import {baseUrl} from "../../constants/constants"
-import {signup}  from "@/lib/user"; 
+import { signup } from "@/lib/user";
 
 export default function Home() {
-  const router = useRouter()
-  const [user,setUser] = useState({
-    username : "",
-    email : "",
-    password :""
-  })
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  function handleChange(e : any){
-      setUser( prev => {
-        return {
-          ...prev,
-          [e.target.name]:e.target.value
-        }
-      })
+  function handleChange(e: any) {
+    setUser((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
   }
 
   const registerUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res=await signup(user)
-    if(res){
-      router.push("/")
+    setLoading(true);
+    const res = await signup(user);
+    setLoading(false);
+    if (res) {
+      router.push("/");
     }
   };
-
 
   return (
     <section>
       <div className=" max-w-screen-xl px-3 py-8 sm:px-6 lg:px-0">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-0">
           <div className="md:col-span-3">
-          <img src={"./op2.png"} 
-            width={800}
-            height={800}
-            className="rounded" alt="" />
+            <img
+              src={"./op2.png"}
+              width={800}
+              height={800}
+              className="rounded"
+              alt=""
+            />
           </div>
 
           <div className="flex flex-col gap-4 max-w-lg md:max-w-none">
@@ -54,8 +59,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4 mt-4">
-
-            <input
+              <input
                 onChange={handleChange}
                 className="border-none focus:outline-none"
                 type="text"
@@ -71,7 +75,7 @@ export default function Home() {
                 placeholder="Enter Your Email"
                 name="email"
               />
-              <hr className="h-[1.5px] bg-slate-500" />
+             <hr className="h-[1.5px] bg-slate-500" />
               <input
                 onChange={handleChange}
                 className="border-none focus:outline-none"
@@ -82,21 +86,30 @@ export default function Home() {
               <hr className="h-[1.5px] bg-slate-500" />
             </div>
 
-
-
-
             <Button
-            onClick={registerUser}
-            className="bg-[#db4444] text-white w-full h-[56px]">Create Account</Button>
+              onClick={registerUser}
+              className="bg-[#db4444] text-white w-full h-[56px]"
+            >
+              {loading ? (
+                <div className="flex items-center justify-center min-h-screen">
+                  <div className="w-5 h-5 border-4 border-white border-dashed rounded-full animate-spin"></div>
+                </div>
+              ) : (
+                "Create Account"
+              )}
+            </Button>
             <div className="flex items-center justify-center gap-3 w-full h-[56px] hover:bg-slate-100 rounded-md border-[1px] border-black">
-            <Image src={"/google.png"} alt="google" width={24} height={24}/>
-            sign up with Google
-
+              <Image src={"/google.png"} alt="google" width={24} height={24} />
+              sign up with Google
             </div>
 
-          <p className="text-center">Already have an account? <Link className="font-semibold ml-2 underline " href={"/"}> log in</Link></p>
-                 
-
+            <p className="text-center">
+              Already have an account?{" "}
+              <Link className="font-semibold ml-2 underline " href={"/"}>
+                {" "}
+                log in
+              </Link>
+            </p>
           </div>
         </div>
       </div>

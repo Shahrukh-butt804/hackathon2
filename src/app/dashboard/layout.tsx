@@ -1,6 +1,7 @@
 "use client";
 import NavSection from "@/components/NavSection";
 import { fetchCartsByUserId } from "@/lib/getPost";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Create a context to share state
@@ -37,9 +38,17 @@ function CartProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const router = useRouter();
   const [totalCarts, setTotalCarts] = useState(0);
 
-  
+  useEffect(() => {
+    const user= JSON.parse(localStorage.getItem("user") as string)
+    if(!user){
+      router.push("/")
+    }
+ }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const userId = JSON.parse(localStorage.getItem("user") || "{}")._id;

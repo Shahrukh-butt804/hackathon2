@@ -1,18 +1,18 @@
 "use client";
 
-import Image from "next/image";
+import { useCart } from "@/app/dashboard/layout";
 import {
-  OctagonAlert,
   ArrowDown,
   Check,
-  ShoppingCart,
   Menu,
+  OctagonAlert,
+  ShoppingCart,
 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link as ScrollLink } from 'react-scroll';
-import { fetchCartsByUserId } from "@/lib/getPost";
-import { useCart } from "@/app/dashboard/layout";
+import Swal from "sweetalert2";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +21,26 @@ export default function Home() {
   const {totalCarts:cartItems} = useCart()
 
 
+  function handleLogOut() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out from your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("user"); // Remove user data from localStorage
+        router.push("/"); // Redirect to the homepage or login page
+  
+        Swal.fire("Logged Out!", "You have been successfully logged out.", "success");
+      }
+    });
+  }
+  
 
   return (
     <>
@@ -93,7 +113,7 @@ export default function Home() {
             About us
           </h1>
           <h1
-           onClick={() => router.push("/")}
+           onClick={handleLogOut}
           className="hover:text-[#007580] cursor-pointer">Log out</h1>
         </div>
 

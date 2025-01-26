@@ -107,7 +107,12 @@ export const fetchCartsByUserId = async (userId) => {
 
   } catch (error) {
     console.error('Error fetching carts:', error);
-    alert(`Failed to fetch carts: ${error.message}`);
+    Swal.fire({
+      title: "Error!",
+      text: error.message || "Something went wrong. Please try again.", 
+      icon: "error", // Change the icon to "error"
+      confirmButtonText: "Okay",
+    });
     return [];
   }
 }

@@ -1,4 +1,4 @@
-import {sanityClientforSignUP} from '@/lib/sanityClient';
+import { sanityClientforSignUP } from '@/lib/sanityClient';
 import Swal from "sweetalert2";
 
 async function signup(user) {
@@ -12,6 +12,53 @@ async function signup(user) {
         });
         return;
       }
+
+      if (user.username.length < 3) {
+        Swal.fire({
+          title: "Error!",
+          text: "username must be 3 characters long", 
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
+        return;
+      }
+
+      if (!user.email.includes("@")) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please enter Valid email address", 
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
+        return;
+      }
+      if (user.password.length < 8) {
+        Swal.fire({
+          title: "Error!",
+          text: "Password must be 8 characters long",
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
+        return;
+      }
+
+      // check if user already exists
+      const existingUser = await sanityClientforSignUP.fetch(
+        `*[_type == "user" && email == $email][0]`,
+        { email: user.email }
+      );
+
+      if (existingUser) {
+        Swal.fire({
+          title: "Error!",
+          text: "User already exists",
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
+        return;
+      }
+
+
   
       const newUser = await sanityClientforSignUP.create({
         _type: 'user', // Matches the schema name in Sanity
@@ -119,8 +166,8 @@ async function addToCart(userId, productId) {
         createdAt: new Date().toISOString(),
       });
 
-      alert('Cart created and product added!');
-      console.log('Created Cart:', newCart);
+      // alert('Cart created and product added!');
+      // console.log('Created Cart:', newCart);
     } else {
       // If cart exists, add product to the existing items
       const updatedCart = await sanityClientforSignUP
@@ -174,4 +221,5 @@ async function addToCart(userId, productId) {
   }
 }
   
-export {signup ,login,addToCart};
+export { addToCart, login, signup };
+

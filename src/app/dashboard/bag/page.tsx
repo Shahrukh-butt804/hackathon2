@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Trash2, Heart } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
-import {fetchCartsByUserId} from "@/lib/getPost"
-import { getProductById } from '@/lib/getPost'
-import { urlFor } from "@/lib/sanityClient";
 import Spinner from "@/components/SpinnerTAIL";
+import { Button } from "@/components/ui/button";
+import { fetchCartsByUserId, getProductById } from "@/lib/getPost";
+import { urlFor } from "@/lib/sanityClient";
+import { Heart, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 export default function Page() {
   const [cartItems,setCartItems] = useState([])
   const [products,setProducts] = useState<any>([])

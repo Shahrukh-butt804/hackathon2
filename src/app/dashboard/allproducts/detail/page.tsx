@@ -4,15 +4,13 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { getProductById } from "@/lib/getPost";
 import { urlFor } from "@/lib/sanityClient";
+import { addToCart } from "@/lib/user";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Spinner from "../../../../components/SpinnerTAIL";
-import { Suspense } from "react";
-import { addToCart } from "@/lib/user";
 import { useCart } from "../../layout";
-import Swal from "sweetalert2";
 
 const FeaturedProduct = [
   { image: "/op7.png", name: "Library Stool Chair", price: 20 },
