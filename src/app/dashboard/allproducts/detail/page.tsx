@@ -80,7 +80,7 @@ const FeaturedProduct = [
       </div>
           )
           :
-          <div className='absolute top-0 text-center'>
+          <div className=''>
           <Spinner />
           </div>
           }

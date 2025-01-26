@@ -67,8 +67,9 @@ export default function Home() {
           >
             Home
           </h1>
-          <h1 className="hover:text-[#007580] cursor-pointer">Shop</h1>
-          <h1 className="hover:text-[#007580] cursor-pointer">Product</h1>
+          <h1 className="hover:text-[#007580] cursor-pointer"><a
+          style={{scrollBehavior:"smooth"}} 
+          href="#product-container">Product</a></h1>
           <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
           <h1
             onClick={() => router.push("/dashboard/contactus")}
@@ -83,6 +84,9 @@ export default function Home() {
           >
             About us
           </h1>
+          <h1
+           onClick={() => router.push("/")}
+          className="hover:text-[#007580] cursor-pointer">Log out</h1>
         </div>
 
         <div className="flex items-center gap-4 rounded-lg p-2 ">

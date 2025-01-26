@@ -80,7 +80,7 @@ export default function Page() {
 
             ))
           :
-          <div className='absolute top-16 text-center'>
+          <div className=''>
           <Spinner />
           </div>
           

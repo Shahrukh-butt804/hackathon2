@@ -220,7 +220,9 @@ export default function Home() {
     
           {/* Our Product */}
 
-         <div className="font-semibold text-[32px] mt-10 text-center">Our Product</div>
+         <div 
+         id="product-container"
+         className="font-semibold text-[32px] mt-10 text-center">Our Product</div>
           <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
 
             {products?.length > 0 ? products?.map((product : any, index) => (
