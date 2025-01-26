@@ -7,7 +7,7 @@ import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Spinner from "../../components/SpinnerTAIL";
+import Spinner from "../../../components/SpinnerTAIL";
 const product = [
   { image: "/op7.png", name: "Library Stool Chair", price: 20 },
   { image: "/op5.png", name: "Library Stool Chair", price: 20 },
@@ -64,7 +64,7 @@ export default function Page() {
                 <div className="flex justify-between gap-2 items-center mt-2">
                 <h1 className="text-md hover:text-[#029FAE] font-semibold">{product?.title}</h1>
                 <ShoppingCart
-                onClick={() =>  router.push(`/allproducts/detail?productId=${String(product._id)}`)}
+                onClick={() =>  router.push(`/dashboard/allproducts/detail?productId=${String(product._id)}`)}
                 className="hover:bg-[#029FAE] hover:text-white bg-slate-100 rounded-sm p-[0px]" />
 
                 </div>

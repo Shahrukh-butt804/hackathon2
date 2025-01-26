@@ -62,7 +62,7 @@ export default function Home() {
       <div className="flex justify-between shadow-lg  items-center px-5 lg:px-[300px] py-[14px]">
         <div className="hidden md:flex items-center gap-[32px] font-bold text-[14px] text-slate-500">
           <h1
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/dashboard")}
             className="hover:text-[#007580] cursor-pointer"
           >
             Home
@@ -71,14 +71,14 @@ export default function Home() {
           <h1 className="hover:text-[#007580] cursor-pointer">Product</h1>
           <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
           <h1
-            onClick={() => router.push("/contactus")}
+            onClick={() => router.push("/dashboard/contactus")}
             className="hover:text-[#007580] cursor-pointer"
           >
             Contact us
           </h1>
 
           <h1
-            onClick={() => router.push("/aboutus")}
+            onClick={() => router.push("/dashboard/aboutus")}
             className="hover:text-[#007580] cursor-pointer"
           >
             About us

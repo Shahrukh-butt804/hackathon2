@@ -85,7 +85,7 @@ export default function Page() {
 
              <div className="text-center md:text-start lg:text-center">
              <Button
-                onClick={() => router.push("/bag")}
+                onClick={() => router.push("/dashboard")}
                 className="bg-[#029FAE] w-52 p-5 mt-5  rounded-full text-white"
               >
                 Member Checkout

@@ -8,7 +8,7 @@ import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import Spinner from '../../../components/SpinnerTAIL'
+import Spinner from '../../../../components/SpinnerTAIL'
 import { Suspense } from 'react';
 
 const FeaturedProduct = [
@@ -70,7 +70,7 @@ const FeaturedProduct = [
               {product?.description}
             </p>
             <Button
-            onClick={()=> router.push("/bag")} className="bg-[#029FAE] w-28 px-2 text-white">
+            onClick={()=> router.push("/dashboard/bag")} className="bg-[#029FAE] w-28 px-2 text-white">
             <ShoppingCart />  Add To Cart 
                     </Button>
           </div>
