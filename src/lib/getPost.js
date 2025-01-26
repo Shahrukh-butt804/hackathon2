@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import sanityClient from './sanityClient';
 
 export const getStaticPropsCategories = async () => {
@@ -13,6 +14,12 @@ export const getStaticPropsCategories = async () => {
       };
     } catch (error) {
       console.error("Error fetching Categories", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Something went wrong. Please try again.", 
+        icon: "error", // Change the icon to "error"
+        confirmButtonText: "Okay",
+      });
       return {
         notFound: true,
       };
@@ -32,6 +39,12 @@ export const getStaticPropsAllData = async () => {
       };
     } catch (error) {
       console.error("Error fetching product", error)
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Something went wrong. Please try again.", 
+        icon: "error", // Change the icon to "error"
+        confirmButtonText: "Okay",
+      });
       return {
         notFound: true,
       };
@@ -47,6 +60,12 @@ export const getProductById = async (id) => {
       return product;
     } catch (error) {
       console.error("Error fetching product by ID:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Something went wrong. Please try again.", 
+        icon: "error", // Change the icon to "error"
+        confirmButtonText: "Okay",
+      });
       return null;
     }
 };

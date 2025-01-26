@@ -1,9 +1,15 @@
 import {sanityClientforSignUP} from '@/lib/sanityClient';
+import Swal from "sweetalert2";
 
 async function signup(user) {
     try {
       if (!user.username || !user.email || !user.password) {
-        alert('All fields are required!');
+        Swal.fire({
+          title: "Error!",
+          text: "All fields are required", 
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
         return;
       }
   
@@ -14,19 +20,34 @@ async function signup(user) {
         password: user.password, // Avoid storing plaintext passwords in production
       });
   
-      alert('User created successfully!');
+      Swal.fire({
+        title: "Success!",
+        text: "User Created successfully",
+        icon: "success",
+        confirmButtonText: "Cool",
+      });
       console.log('Created User:', newUser);
       return true;
 
     } catch (error) {
       console.error('Error creating user:', error);
-      alert(`Failed to create user: ${error.message}`);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Something went wrong. Please try again.", 
+        icon: "error", // Change the icon to "error"
+        confirmButtonText: "Okay",
+      });
     }
 }
 async function login(user) {
     try {
       if (!user.email || !user.password) {
-        alert('Email and password are required!');
+        Swal.fire({
+          title: "Error!",
+          text: "Email password is required", 
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
         return;
       }
   
@@ -38,25 +59,45 @@ async function login(user) {
   
       // If no user is found
       if (!existingUser) {
-        alert('User not found!');
+        Swal.fire({
+          title: "Error!",
+          text: "user not found", 
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
         return;
       }
   
       // Compare the provided password with the stored password (you would ideally use bcrypt to hash/compare passwords in a production environment)
       if (existingUser.password !== user.password) {
-        alert('Invalid password!');
+        Swal.fire({
+          title: "Error!",
+          text: "Invalid password", 
+          icon: "error", // Change the icon to "error"
+          confirmButtonText: "Okay",
+        });
         return;
       }
   
       // If the user exists and the password matches, proceed
-      alert('Login successful!');
-      console.log('Logged in User:', existingUser);
+          Swal.fire({
+          title: "Success!",
+          text: "Logged In successfully",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      // console.log('Logged in User:', existingUser);
       return existingUser;
       // Optionally, you can store a session or JWT token here (localStorage, cookies, etc.)
       
     } catch (error) {
       console.error('Error during login:', error);
-      alert(`Failed to log in: ${error.message}`);
+         Swal.fire({
+      title: "Error!",
+      text: error.message || "Something went wrong. Please try again.", 
+      icon: "error", // Change the icon to "error"
+      confirmButtonText: "Okay",
+    });
     }
 }
 
@@ -114,11 +155,22 @@ async function addToCart(userId, productId) {
     // Update cart with the total price
     // await sanityClientforSignUP.patch(updatedCart._id).set({ totalPrice }).commit();
 
-    alert('Cart updated Successfully');
+    // alert('Cart updated Successfully');
+    Swal.fire({
+      title: "Success!",
+      text: "Cart updated successfully",
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
     return true 
   } catch (error) {
     console.error('Error adding to cart:', error);
-    alert(`Failed to add to cart: ${error.message}`);
+    Swal.fire({
+      title: "Error!",
+      text: error.message || "Something went wrong. Please try again.", 
+      icon: "error", // Change the icon to "error"
+      confirmButtonText: "Okay",
+    });
   }
 }
   
