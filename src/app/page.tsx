@@ -89,7 +89,7 @@ export default function Home() {
               >
                 don't you have an account?
               </Link>
-              <div className="flex flex-col md:flex-row gap-4 items-start  md:items-center justify-between">
+              <div className="flex flex-col gap-4 items-start   justify-between">
                 <Button
                   onClick={handlelogin}
                   className="bg-[#ed7f89] hover:bg-[#d85560] text-white w-[143px] h-[56px]"
