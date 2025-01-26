@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Link as ScrollLink } from 'react-scroll';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,9 +68,8 @@ export default function Home() {
           >
             Home
           </h1>
-          <h1 className="hover:text-[#007580] cursor-pointer"><a
-          style={{scrollBehavior:"smooth"}} 
-          href="#product-container">Product</a></h1>
+          <h1 className="hover:text-[#007580] cursor-pointer"><ScrollLink to="product-container" smooth={true} duration={500}
+          >Product</ScrollLink></h1>
           <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
           <h1
             onClick={() => router.push("/dashboard/contactus")}
