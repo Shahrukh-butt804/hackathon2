@@ -8,6 +8,7 @@ import { useState } from "react";
 
 // import {useDispatch } from "react-redux";
 // import { addUser } from "@/lib/userSlice/user";
+import { login } from "@/lib/user";
 
 export default function Home() {
 
@@ -26,21 +27,12 @@ export default function Home() {
       })
   }
 
-//   async function login(){
-//     try {
-//         const res = await axios.post(`${baseUrl}/user/login`,user)
-//         if (res.status == 200) {
-//           // console.log("user logged in")
-//           // console.log(res.data)
-//           dispatch(addUser({
-//             user : res.data.data
-//           }))
-//           router.push("/dashboard")
-//         }
-//     } catch (error) {
-//       console.log("something went wrong While logging in",error)
-//     }
-//   }
+  const handlelogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res=await login(user)
+    console.log(res)
+    // router.push("/dashboard")
+  };
 
 
 
@@ -84,8 +76,7 @@ export default function Home() {
           <Link className="text-[#ed7f89] hover:text-[#d85560] text-[16px]" href="/signup">don't you have an account?</Link>
           <div className="flex items-center justify-between">
             <Button 
-            // onClick={login}
-            onClick={() => router.push("/dashboard")}
+            onClick={handlelogin}
             className="bg-[#ed7f89] hover:bg-[#d85560] text-white w-[143px] h-[56px]">Login</Button>
             <a className="underline text-[#ed7f89] hover:text-[#d85560] text-[16px]" href="#">Forgot Password?</a>
           </div>

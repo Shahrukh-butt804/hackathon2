@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 // import axios from "axios";
 // import {baseUrl} from "../../constants/constants"
+import {signup}  from "@/lib/user"; 
 
 export default function Home() {
   const router = useRouter()
@@ -24,6 +25,11 @@ export default function Home() {
       })
   }
 
+  const registerUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res=await signup(user)
+    console.log(res)
+  };
 
 
   return (
@@ -78,7 +84,7 @@ export default function Home() {
 
 
             <Button
-            // onClick={registerUser}
+            onClick={registerUser}
             className="bg-[#db4444] text-white w-full h-[56px]">Create Account</Button>
             <div className="flex items-center justify-center gap-3 w-full h-[56px] hover:bg-slate-100 rounded-md border-[1px] border-black">
             <Image src={"/google.png"} alt="google" width={24} height={24}/>

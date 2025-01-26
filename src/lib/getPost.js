@@ -49,4 +49,4 @@ export const getProductById = async (id) => {
       console.error("Error fetching product by ID:", error);
       return null;
     }
-  };
+};
