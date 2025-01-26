@@ -10,6 +10,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Spinner from '../../../../components/SpinnerTAIL'
 import { Suspense } from 'react';
+import {addToCart} from '@/lib/user'; 
+import { useCart } from '../../layout'
 
 const FeaturedProduct = [
     { image: "/op7.png", name: "Library Stool Chair", price: 20 },
@@ -30,6 +32,10 @@ const FeaturedProduct = [
     const searchParams = useSearchParams();
     const productId = searchParams.get('productId');
     const [product,setProducts] = useState<any>("")
+    const [loading,setLoading] = useState<boolean>(false)
+    const user = JSON.parse(localStorage.getItem("user") || "");
+    const {totalCarts,setTotalCarts} = useCart()
+
 
    useEffect(() => {
     if (productId) {
@@ -37,9 +43,20 @@ const FeaturedProduct = [
       .then(res => {
         setProducts(res)
       });
-
     }
     }, [productId]) 
+
+
+
+    const handleAddToCart = async () => {
+      // console.log(user?._id, product._id)
+       const res= await addToCart(user?._id, product._id); // userId and productId are passed
+       if(res){
+         setTotalCarts(totalCarts + 1)
+         router.push("/dashboard/bag")
+       }
+   
+    };
 
 
   return (
@@ -70,8 +87,8 @@ const FeaturedProduct = [
               {product?.description}
             </p>
             <Button
-            onClick={()=> router.push("/dashboard/bag")} className="bg-[#029FAE] w-28 px-2 text-white">
-            <ShoppingCart />  Add To Cart 
+            onClick={handleAddToCart} className="bg-[#029FAE] w-28 px-2 text-white">
+            <ShoppingCart/>  Add To Cart 
                     </Button>
           </div>
         </div>

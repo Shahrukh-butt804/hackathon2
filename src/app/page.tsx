@@ -32,6 +32,7 @@ export default function Home() {
     const res=await login(user)
     if(res){
       router.push("/dashboard")
+      localStorage.setItem("user",JSON.stringify(res))
     }
   };
 

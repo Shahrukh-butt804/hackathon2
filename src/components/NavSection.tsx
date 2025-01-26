@@ -9,12 +9,18 @@ import {
   Menu,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as ScrollLink } from 'react-scroll';
+import { fetchCartsByUserId } from "@/lib/getPost";
+import { useCart } from "@/app/dashboard/layout";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  
+  const {totalCarts:cartItems} = useCart()
+
+
 
   return (
     <>
@@ -43,7 +49,9 @@ export default function Home() {
       </div>
 
       {/* Mid Nav */}
-      <div className="flex justify-between bg-[#f0f2f3]  items-center px-5 lg:px-[300px] py-[20px]">
+      <div
+      onClick={() => router.push("/dashboard/bag")}
+      className="flex cursor-pointer justify-between bg-[#f0f2f3]  items-center px-5 lg:px-[300px] py-[20px]">
         <div className="flex items-center gap-3">
           {" "}
           <Image src={"/logo.png"} alt="logo" width={40} height={40} />
@@ -54,7 +62,7 @@ export default function Home() {
           <ShoppingCart />
           <span>Cart</span>
           <span className="w-8 h-8 flex justify-center items-center bg-[#007580] text-white rounded-full">
-            2
+            {cartItems}
           </span>
         </div>
       </div>

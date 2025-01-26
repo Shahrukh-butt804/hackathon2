@@ -50,3 +50,45 @@ export const getProductById = async (id) => {
       return null;
     }
 };
+
+export const fetchCartsByUserId = async (userId) => {
+  try {
+    // Fetch all carts for the given userId
+    const userCarts = await sanityClient.fetch(
+      `*[_type == "cart" && user._ref == $userId]`,
+      { userId }
+    );
+
+    if (userCarts.length === 0) {
+      // alert('No carts found for this user.');
+      // console.log('No carts for user:', userId);
+      return [];
+    }
+
+    // alert('Carts fetched successfully!');
+    // console.log('Fetched Carts:', userCarts);
+
+    // // Optionally, you can fetch product details for each cart here, if needed
+    // const cartsWithProducts = await Promise.all(
+    //   userCarts.map(async (cart) => {
+    //     const products = await Promise.all(
+    //       cart.items.map(async (item) => {
+    //         const product = await sanityClient.fetch(
+    //           `*[_type == "product" && _id == $productId][0]`,
+    //           { productId: item._ref }
+    //         );
+    //         return product || null;
+    //       })
+    //     );
+    //     return { ...cart, products };
+    //   })
+    // );
+
+    return userCarts;
+
+  } catch (error) {
+    console.error('Error fetching carts:', error);
+    alert(`Failed to fetch carts: ${error.message}`);
+    return [];
+  }
+}

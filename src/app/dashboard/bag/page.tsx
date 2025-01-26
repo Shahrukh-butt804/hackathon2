@@ -1,14 +1,59 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Trash2, Heart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
-
+import {fetchCartsByUserId} from "@/lib/getPost"
+import { getProductById } from '@/lib/getPost'
+import { urlFor } from "@/lib/sanityClient";
+import Spinner from "@/components/SpinnerTAIL";
 export default function Page() {
+  const [cartItems,setCartItems] = useState([])
+  const [products,setProducts] = useState<any>([])
+  const [message,setMessage] = useState("");
+  const [totalPrice,setTotalPrice] = useState(0)
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userId = JSON.parse(localStorage.getItem("user") || "{}")._id;
+      const res = await fetchCartsByUserId(userId);
+      console.log("THE RESPONSE",res);
+      if (res.length > 0) {
+        setCartItems(res[0]?.items);
+      }else{
+        setMessage("No Cart items found");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    
+    cartItems?.map(({_ref}) => {
+      // console.log("item",_ref);
+      getProductById(_ref).then(res => {
+        // console.log("product",res.price);
+        setTotalPrice(totalPrice + res.price);
+        setProducts((prev : []) => [...prev,res])
+      })
+
+
+    })
+
+
+
+
+
+  }, [cartItems]);
+
+
+
+
   return (
     <>
     <section className="px-5 md:px-10 lg:px-[300px] mb-2 md:mb-24">
@@ -17,14 +62,22 @@ export default function Page() {
           <div className="md:col-span-3 ">
             <h1 className="my-5 text-xl font-semibold">Bag</h1>
 
-            <div className="flex gap-5 items-start">
+          {products?.length > 0 ?
+          products?.map((product : any)=>{
+            return (
+              <div className="flex gap-5 items-start">
               <div>
-                <Image src={"/fp3.png"} alt="pic" width={120} height={150} />
+              <img
+                src={urlFor(product?.image)?.url()} 
+                alt="image"
+                width={150}
+                height={150}
+              />
               </div>
               <div className="flex justify-between w-full p-1 ">
                 <div className="flex flex-col gap-2 text-slate-500 text-sm">
-                  <p className="text-black text-lg">Library Stool Chair</p>
-                  <p>Ashen Slate/Cobalt Bliss</p>
+                  <p className="text-black text-lg">{product.title}</p>
+                  <p>{product.description.slice(0,50)}</p>
                   <div className="flex justify-between items-center">
                     <p>size L</p>
                     <p>Quantity 1</p>
@@ -35,31 +88,17 @@ export default function Page() {
                     <Trash2 size={20} />
                   </div>
                 </div>
-                <div className="text-black">MRP: $99</div>
+                <div className="text-black">MRP: ${product.price}</div>
               </div>
             </div>
+            )
 
-            <div className="flex gap-5 mt-5 items-start">
-              <div>
-                <Image src={"/op5.png"} alt="pic" width={120} height={150} />
-              </div>
-              <div className="flex justify-between w-full p-1 ">
-                <div className="flex flex-col gap-2 text-slate-500 text-sm">
-                  <p className="text-black text-lg">Library Stool Chair</p>
-                  <p>Ashen Slate/Cobalt Bliss</p>
-                  <div className="flex justify-between items-center">
-                    <p>size L</p>
-                    <p>Quantity 1</p>
-                  </div>
+          })
+          :
+          message ? <p>{message}</p> :
+          <Spinner />
 
-                  <div className="flex justify-start gap-2 items-center">
-                    <Heart size={20} />
-                    <Trash2 size={20} />
-                  </div>
-                </div>
-                <div className="text-black">MRP: $99</div>
-              </div>
-            </div>
+          }
           </div>
 
           <div className="md:col-span-1">
@@ -70,7 +109,7 @@ export default function Page() {
 
               <div className="flex text-[12px] justify-between items-center mt-5">
                 <p>Subtotal</p>
-                <p>$198.00</p>
+                <p>${totalPrice}</p>
               </div>
               <div className="flex text-[12px] justify-between items-center mt-3">
                 <p>Estimated Delivery & Handling</p>
@@ -79,7 +118,7 @@ export default function Page() {
               <hr className="h-[1.5px] bg-slate-500" />
               <div className="flex text-[12px] justify-between items-center mt-5">
                 <p>Total</p>
-                <p>$198.00</p>
+                <p>${totalPrice}</p>
               </div>
               <hr className="h-[1.5px] bg-slate-500" />
 
