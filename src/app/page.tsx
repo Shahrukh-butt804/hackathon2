@@ -30,8 +30,9 @@ export default function Home() {
   const handlelogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const res=await login(user)
-    console.log(res)
-    // router.push("/dashboard")
+    if(res){
+      router.push("/dashboard")
+    }
   };
 
 

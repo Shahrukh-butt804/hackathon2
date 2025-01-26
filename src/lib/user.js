@@ -16,6 +16,8 @@ async function signup(user) {
   
       alert('User created successfully!');
       console.log('Created User:', newUser);
+      return true;
+
     } catch (error) {
       console.error('Error creating user:', error);
       alert(`Failed to create user: ${error.message}`);
@@ -49,6 +51,7 @@ async function login(user) {
       // If the user exists and the password matches, proceed
       alert('Login successful!');
       console.log('Logged in User:', existingUser);
+      return true;
       // Optionally, you can store a session or JWT token here (localStorage, cookies, etc.)
       
     } catch (error) {

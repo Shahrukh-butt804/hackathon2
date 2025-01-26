@@ -28,7 +28,9 @@ export default function Home() {
   const registerUser = async (e: React.FormEvent) => {
     e.preventDefault();
     const res=await signup(user)
-    console.log(res)
+    if(res){
+      router.push("/")
+    }
   };
 
 
