@@ -17,7 +17,8 @@ export default function Page() {
   const [totalPrice, setTotalPrice] = useState(0);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const user= JSON.parse(localStorage.getItem("user") as string)
+  const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "{}") : {};
+
 
   useEffect(() => {
     const fetchData = async () => {
