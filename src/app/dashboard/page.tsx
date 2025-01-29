@@ -89,7 +89,7 @@ export default function Home() {
 
           {/* Featured Product */}
           <div className="font-semibold text-center md:text-start text-[32px] mt-10">Featured Product</div>
-          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
+          <div className="flex items-center justify-center md:justify-between flex-wrap gap-3 mt-6 mb-24">
             {featuredProduct.map((product, index) => (
               <div key={index} className=" p-1">
                 {" "}
@@ -99,13 +99,13 @@ export default function Home() {
                   width={210}
                   height={220}
                 />
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between bg-slate-300 py-2 px-2">
                   <div className="flex flex-col gap-0">
-                    <h1 className="text-md hover:text-[#029FAE]">{product.name}</h1>
-                    <h1 className="font-bold">${product.price}</h1>
+                    <h1 className="text-md cursor-default font-medium">{product.name}</h1>
+                    {/* <h1 className="font-bold">${product.price}</h1> */}
                   </div>
 
-                  <ShoppingCart className="hover:bg-[#029FAE] hover:text-white bg-slate-200 rounded-sm p-[2px]" />
+                  {/* <ShoppingCart className="hover:bg-[#029FAE] hover:text-white bg-slate-200 rounded-sm p-[2px]" /> */}
                 </div>
               </div>
             ))}

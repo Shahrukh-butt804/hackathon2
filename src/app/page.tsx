@@ -33,6 +33,10 @@ export default function Home() {
     }
   };
 
+
+  // const url = process.env.NEXT_PUBLIC_PRODUCT_ID
+  // console.log("this is process .env",url)
+
   return (
       <section>
         <div className=" max-w-screen-xl px-3 py-8 sm:px-6 lg:px-0">
