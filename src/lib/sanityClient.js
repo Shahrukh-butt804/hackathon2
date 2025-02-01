@@ -17,11 +17,11 @@ const sanityClient = createClient({
 //     token:'skR8HfGX69eOXWamnPo5rgAumFWt8L9IuRxrsofpTugdhbyg71ZnbfidyRIh3VOYZntrRDUNoWKz66E71FER4dl48Xdd0app8tcdIjw6AOIz6p4nFghkJ3wcaP2zWlXreF7i62L35fJuSjOp7lQYqggRR61ikVBLAtBgC9NDzemRsvE2S9Ko', //
 // });
 export const sanityClientforSignUP = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, 
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID_SANITY, 
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   useCdn: false, 
-  apiVersion: process.env.SANITY_API_VERSION, 
-  token: process.env.SANITY_API_TOKEN,
+  apiVersion: "2023-01-01", 
+  token: process.env.NEXT_PUBLIC_TOKEN_SANITY,
 });
 
 export default sanityClient;
