@@ -33,6 +33,7 @@ function ProductDetailPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const user = JSON.parse(localStorage.getItem("user") || "");
   const { totalCarts, setTotalCarts } = useCart();
+  const [count, setCount] = useState(1)
 
   useEffect(() => {
     if (productId) {
@@ -46,7 +47,7 @@ function ProductDetailPage() {
     if (loading) return;
     setLoading(true);
     // console.log(user?._id, product._id)
-    const res = await addToCart(user?._id, product._id); // userId and productId are passed
+    const res = await addToCart(user?._id, product._id,count); // userId and productId are passed
     if (res) {
       setTotalCarts(totalCarts + 1);
       router.push("/dashboard/bag");
@@ -93,6 +94,21 @@ function ProductDetailPage() {
                       "Add to cart"
                     )}
                   </Button>
+                </div>
+
+                {/* Quantity */}
+                <div className="flex w-[150px] h-[60px] mt-3  border-[#049eaf] items-center justify-between  p-4 border rounded-lg shadow-lg ">
+                  <button
+                    className="border px-4 py-2 rounded-lg bg-[#049eaf] text-white"
+                    onClick={() => setCount(count - 1)}
+                    disabled={count <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="text-xl font-semibold">{count}</span>
+                  <button
+                    className="border px-4 py-2 rounded-lg bg-[#049eaf] text-white"
+                  onClick={() => setCount(count + 1)}>+</button>
                 </div>
               </div>
             </div>

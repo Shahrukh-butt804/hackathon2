@@ -73,7 +73,7 @@ async function signup(user) {
         icon: "success",
         confirmButtonText: "Okay",
       });
-      console.log('Created User:', newUser);
+      // console.log('Created User:', newUser);
       return true;
 
     } catch (error) {
@@ -148,7 +148,7 @@ async function login(user) {
     }
 }
 
-async function addToCart(userId, productId) {
+async function addToCart(userId, productId,quantity) {
   try {
     // Fetch the existing cart for the user
     const existingCart = await sanityClientforSignUP.fetch(
@@ -161,9 +161,14 @@ async function addToCart(userId, productId) {
       await sanityClientforSignUP.create({
         _type: "cart",
         user: { _ref: userId },
-        items: [{ _ref: productId }],
+        items: [{
+          product: { _ref: productId },  // Reference to the product
+          quantity: quantity,
+          wishlist : true            // Quantity
+        }],
         totalPrice: 0, // This will be updated after calculating total
         createdAt: new Date().toISOString(),
+         //
       });
 
       Swal.fire({
@@ -175,7 +180,6 @@ async function addToCart(userId, productId) {
     } else {
       // If cart exists, check if the product already exists in the cart
       const productExists = existingCart.items.some((item) => item._ref === productId);
-
       if (productExists) {
         Swal.fire({
           title: "Already in Cart!",
@@ -188,10 +192,14 @@ async function addToCart(userId, productId) {
 
       // Add the product to the existing cart if it doesn't exist
       await sanityClientforSignUP
-        .patch(existingCart._id)
-        .setIfMissing({ items: [] })
-        .append("items", [{ _ref: productId }])
-        .commit();
+      .patch(existingCart._id)
+      .setIfMissing({ items: [] })
+      .append("items", [{
+        product: { _ref: productId }, // Reference to the product
+        quantity: quantity,           // Quantity
+        wishlist : true 
+      }])
+      .commit();
 
       Swal.fire({
         title: "Success!",
@@ -215,6 +223,73 @@ async function addToCart(userId, productId) {
     return false;
   }
 }
+
+async function removeItemFromCart(userId, productId) {
+  try {
+    // Fetch the existing cart for the user
+    const existingCart = await sanityClientforSignUP.fetch(
+      `*[_type == "cart" && user._ref == $userId][0]`,
+      { userId }
+    );
+
+    if (!existingCart) {
+      Swal.fire({
+        title: "Error!",
+        text: "Cart not found for this user.",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+      return false;
+    }
+
+    // Find the index of the item in the cart
+    const itemIndex = existingCart.items.findIndex(
+      (item) => item.product._ref === productId
+    );
+
+    if (itemIndex === -1) {
+      Swal.fire({
+        title: "Error!",
+        text: "Product not found in cart.",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+      return false;
+    }
+
+    // Remove the item from the cart
+    const updatedItems = existingCart.items.filter(
+      (item) => item.product._ref !== productId
+    );
+
+    // Update the cart with the removed item
+    await sanityClientforSignUP
+      .patch(existingCart._id)
+      .set({ items: updatedItems })
+      .commit();
+
+    Swal.fire({
+      title: "Success!",
+      text: "Item removed from your cart!",
+      icon: "success",
+      confirmButtonText: "Okay",
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Error removing item from cart:", error);
+
+    Swal.fire({
+      title: "Error!",
+      text: error.message || "Something went wrong. Please try again.",
+      icon: "error",
+      confirmButtonText: "Okay",
+    });
+
+    return false;
+  }
+}
+
 async function clearCart(userId) {
   try {
     // Fetch the existing cart for the user
@@ -254,7 +329,6 @@ async function clearCart(userId) {
     return false;
   }
 }
-
 async function fetchCartsByUserId (userId) {
   try {
     // Fetch all carts for the given userId
@@ -266,7 +340,7 @@ async function fetchCartsByUserId (userId) {
     if (userCarts.length === 0) {
       return [];
     }
-
+    // console.log(userCarts)
     return userCarts;
 
   } catch (error) {
@@ -281,5 +355,5 @@ async function fetchCartsByUserId (userId) {
   }
 }
 
-export { addToCart, login, signup ,clearCart,fetchCartsByUserId };
+export { addToCart, login, signup ,clearCart,fetchCartsByUserId ,removeItemFromCart};
 
