@@ -3,7 +3,7 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
 const sanityClient = createClient({
-  projectId: process.env.PROJECT_ID, // Replace with your Sanity project ID
+  projectId: "13h586qu", // Replace with your Sanity project ID
   dataset: 'production',       // Replace with your dataset name
   useCdn: true,                // `true` for faster response, `false` if you need the latest data
    apiVersion: '2023-01-01',    // Use the latest API version
