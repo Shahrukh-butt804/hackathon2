@@ -51,8 +51,8 @@ function ProductDetailPage() {
     if (res) {
       setTotalCarts(totalCarts + 1);
       router.push("/dashboard/bag");
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (

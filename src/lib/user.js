@@ -178,8 +178,10 @@ async function addToCart(userId, productId,quantity) {
         confirmButtonText: "Okay",
       });
     } else {
+
+
       // If cart exists, check if the product already exists in the cart
-      const productExists = existingCart.items.some((item) => item._ref === productId);
+      const productExists = existingCart.items.some((item) => item?.product?._ref === productId);
       if (productExists) {
         Swal.fire({
           title: "Already in Cart!",
@@ -191,6 +193,7 @@ async function addToCart(userId, productId,quantity) {
       }
 
       // Add the product to the existing cart if it doesn't exist
+ 
       await sanityClientforSignUP
       .patch(existingCart._id)
       .setIfMissing({ items: [] })
@@ -207,6 +210,7 @@ async function addToCart(userId, productId,quantity) {
         icon: "success",
         confirmButtonText: "Okay",
       });
+
     }
 
     return true;
