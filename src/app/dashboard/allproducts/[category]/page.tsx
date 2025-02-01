@@ -1,13 +1,13 @@
 "use client";
 
 import Footer from "@/components/Footer";
-import { getStaticPropsAllData } from "@/lib/getPost";
 import { urlFor } from "@/lib/sanityClient";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Spinner from "../../../components/SpinnerTAIL";
+import Spinner from "../../../../components/SpinnerTAIL";
+import { getStaticPropsAllData } from "@/lib/getPost";
 const product = [
   { image: "/op7.png", name: "Library Stool Chair", price: 20 },
   { image: "/op5.png", name: "Library Stool Chair", price: 20 },
@@ -26,12 +26,15 @@ const product = [
   { image: "/op4.png", name: "Library Stool Chair", price: 20 },
 ];
 
-export default function Page() {
+export default function Page({ params }: { params: { category?: string } }) {
+  let { category } = params;
+  category =category?.replace("%20"," ")
+
   const router = useRouter();
   const [products, setProducts] = useState([]);
 
   async function getData() {
-    const res = await getStaticPropsAllData();
+    const res = await getStaticPropsAllData(category);
     if (res?.props?.categories) {
       setProducts(res?.props?.categories);
       // console.log("this is console of getData",res?.props?.categories)
@@ -46,7 +49,7 @@ export default function Page() {
       <div className="px-10 lg:px-[300px] my-24 ">
         {/* All products */}
         <div className="font-semibold text-center md:text-start text-[32px] mt-10">
-          All products
+          {category !== "null" ? category : "All Products"}
         </div>
 
         <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">

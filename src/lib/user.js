@@ -281,6 +281,5 @@ async function fetchCartsByUserId (userId) {
   }
 }
 
-
-export { addToCart, login, signup ,clearCart,fetchCartsByUserId};
+export { addToCart, login, signup ,clearCart,fetchCartsByUserId };
 

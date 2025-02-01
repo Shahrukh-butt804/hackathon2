@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Footer from "@/components/Footer";
 import Spinner from "@/components/SpinnerTAIL";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,10 @@ import { MoveRight, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getStaticPropsAllData, getStaticPropsCategories } from "../../lib/getPost";
+import {
+  getStaticPropsCategories,
+} from "../../lib/getPost";
+import { getStaticPropsAllData } from "@/lib/getPost";
 const logos = [
   { image: "/l1.png" },
   { image: "/l2.png" },
@@ -34,29 +37,28 @@ const featuredProduct = [
 ];
 
 export default function Home() {
-  const [products, setProducts] = useState([])
-  const [categories, setCategories] = useState([])
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  async function getCategory(){
-   const res= await getStaticPropsCategories()
-   setCategories(res?.props?.categories)
-  //  console.log("this is console of getCategory",res?.props?.categories)
+  async function getCategory() {
+    const res = await getStaticPropsCategories();
+    setCategories(res?.props?.categories);
+    //  console.log("this is console of getCategory",res?.props?.categories)
   }
 
-  async function getData(){
-    const res= await getStaticPropsAllData()
-    if(res?.props?.categories){
-      setProducts(res?.props?.categories)
+  async function getData() {
+    const res = await getStaticPropsAllData();
+    if (res?.props?.categories) {
+      setProducts(res?.props?.categories);
       // console.log("this is console of getData",res?.props?.categories)
     }
-   }
-   useEffect(() => {
-    getData()
-    getCategory()
-   },[])
-
+  }
+  useEffect(() => {
+    getData();
+    getCategory();
+  }, []);
 
   return (
     <>
@@ -68,15 +70,13 @@ export default function Home() {
               Best Furniture Collection for your interior.
             </p>
             <Button
-            onClick={()=> router.push("/dashboard/allproducts")}
-            className="bg-[#029FAE] text-white">
+              onClick={() => router.push("/dashboard/allproducts/null")}
+              className="bg-[#029FAE] text-white"
+            >
               {" "}
               shop Now <MoveRight />
             </Button>
           </div>
-
-
-
 
           <div className="flex items-center justify-center md:justify-normal flex-wrap  gap-5 mt-6">
             {logos.map((logo, index) => (
@@ -88,7 +88,9 @@ export default function Home() {
           </div>
 
           {/* Featured Product */}
-          <div className="font-semibold text-center md:text-start text-[32px] mt-10">Featured Product</div>
+          <div className="font-semibold text-center md:text-start text-[32px] mt-10">
+            Featured Product
+          </div>
           <div className="flex items-center justify-center md:justify-between flex-wrap gap-3 mt-6 mb-24">
             {featuredProduct.map((product, index) => (
               <div key={index} className=" p-1">
@@ -101,7 +103,9 @@ export default function Home() {
                 />
                 <div className="flex items-center justify-between bg-slate-300 py-2 px-2">
                   <div className="flex flex-col gap-0">
-                    <h1 className="text-md cursor-default font-medium">{product.name}</h1>
+                    <h1 className="text-md cursor-default font-medium">
+                      {product.name}
+                    </h1>
                     {/* <h1 className="font-bold">${product.price}</h1> */}
                   </div>
 
@@ -112,162 +116,156 @@ export default function Home() {
           </div>
 
           {/* Category*/}
-          <div className="font-semibold text-center md:text-start text-[32px] mt-10">Top Categories</div>
-          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-2 mt-6 mb-24">
-            {categories.length> 0 ? categories.map((product:any, index) => (
-                   <div key={index} className="max-w-[298px] p-1 ">
-                   {" "}
-                   <img
-                     src={urlFor(product?.image).url()} 
-                     alt="image"
-                   />
-                   <div className="flex items-center justify-between bg-black text-white rounded-b-sm">
-   
-                     <div className="flex flex-col gap-1">
-                     <div className="flex justify-between gap-2 items-center mt-2">
-                     <h1 className="text-md hover:text-[#029FAE] font-semibold px-2 pb-1">{product?.title}</h1>
-                     {/* <ShoppingCart className="hover:bg-[#029FAE] hover:text-white bg-slate-100 rounded-sm p-[0px]" /> */}
-   
-                     </div>
-   
-                       {/* <h1 className="text-sm hover:text-[#029FAE]">{product?.description?.slice(0,20)}</h1> */}
-                       {/* <h1 className="font-bold">${product?.price}</h1> */}
-   
-                     </div>
-   
-                   </div>
-                 </div>
-            ))
-            :
-            <div className='absolute '>
-            <Spinner />
-            </div>
-            }
+          <div className="font-semibold text-center md:text-start text-[32px] mt-10">
+            Top Categories
           </div>
+          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-2 mt-6 mb-24">
+            {categories.length > 0 ? (
+              categories.map((product: any, index) => (
+                <div
+                  onClick={() => router.push(`/dashboard/allproducts/${product?.title}`)}
+                  key={index}
+                  className="max-w-[298px] p-1 "
+                >
+                  {" "}
+                  <img src={urlFor(product?.image).url()} alt="image" />
+                  <div className="flex items-center justify-between bg-black text-white rounded-b-sm">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex justify-between gap-2 items-center mt-2">
+                        <h1 className="text-md hover:text-[#029FAE] font-semibold px-2 pb-1">
+                          {product?.title}
+                        </h1>
+                        {/* <ShoppingCart className="hover:bg-[#029FAE] hover:text-white bg-slate-100 rounded-sm p-[0px]" /> */}
+                      </div>
 
-
-
-
+                      {/* <h1 className="text-sm hover:text-[#029FAE]">{product?.description?.slice(0,20)}</h1> */}
+                      {/* <h1 className="font-bold">${product?.price}</h1> */}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="absolute ">
+                <Spinner />
+              </div>
+            )}
+          </div>
 
           {/* Explore NEW */}
-        
-    <div className="container px-5 md:px-0 py-2  lg:pt-24 relative">
 
-    <div className="flex absolute left-[-180px] top-80">
-  <h1 className="text-2xl rotate-90">Explore new and popular styles</h1>
-</div>
+          <div className="container px-5 md:px-0 py-2  lg:pt-24 relative">
+            <div className="flex absolute left-[-180px] top-80">
+              <h1 className="text-2xl rotate-90">
+                Explore new and popular styles
+              </h1>
+            </div>
 
-    <div className="-m-1 flex flex-wrap md:-m-2">
-
-    <div className="flex w-full md:w-1/2 flex-wrap">
-      <div className="w-full p-1 md:p-2">
-      <Image
-          alt="gallery"
-          className="block h-full w-full rounded-lg object-cover object-center"
-          src={"/en1.png"}
-          width={100}
-          height={100} />
-      </div>
-    
-     
-    </div>
-
-    <div className="flex w-full md:w-1/2 flex-wrap">
-      <div className="w-full md:w-1/2 p-1 md:p-2">
-      <Image
-          alt="gallery"
-          className="block h-full w-full rounded-lg object-cover object-center"
-          src={"/en2.png"}
-          width={100}
-          height={100} />
-      </div>
-
-      <div className="w-full md:w-1/2 p-1 md:p-2">
-      <Image
-          alt="gallery"
-          className="block h-full w-full rounded-lg object-cover object-center"
-          src={"/en3.png"}
-          width={100}
-          height={100} />
-      </div>
-
-
-
-      <div className="w-full md:w-1/2 p-1 md:p-2">
-        <Image
-          alt="gallery"
-          className="block h-full w-full rounded-lg object-cover object-center"
-          src={"/en4.png"}
-          width={100}
-          height={100} />
-      </div>
-      <div className="w-full md:w-1/2 p-1 md:p-2">
-        <Image
-          alt="gallery"
-          className="block h-full w-full rounded-lg object-cover object-center"
-          src={"/en5.png"}
-          width={100}
-          height={100} />
-      </div>
-    </div>
-
-
-
-
-
-  </div>
-    </div>
-    
-          {/* Our Product */}
-
-         <div 
-         id="product-container"
-         className="font-semibold text-[32px] mt-10 text-center">Our Product</div>
-          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
-
-            {products?.length > 0 ? products?.map((product : any, index) => (
-              <div key={index} className="max-w-[298px] p-1 ">
-                {" "}
-                <img
-                  src={urlFor(product?.image).url()} 
-                  alt="image"
-                />
-                <div className="flex items-center justify-between">
-
-                  <div className="flex flex-col gap-1">
-                  <div className="flex justify-between gap-2 items-center mt-2">
-                  <h1 className="text-md hover:text-[#029FAE] font-semibold">{product?.title}</h1>
-                  <ShoppingCart
-                  onClick={() =>  router.push(`/dashboard/allproducts/detail?productId=${String(product._id)}`)}
-                  className="hover:bg-[#029FAE] hover:text-white bg-slate-100 rounded-sm p-[0px]" />
-
-                  </div>
-
-                    <h1 className="text-sm hover:text-[#029FAE]">{product?.description?.slice(0,50)}</h1>
-                    <h1 className="font-bold">${product?.price}</h1>
-
-                  </div>
-
+            <div className="-m-1 flex flex-wrap md:-m-2">
+              <div className="flex w-full md:w-1/2 flex-wrap">
+                <div className="w-full p-1 md:p-2">
+                  <Image
+                    alt="gallery"
+                    className="block h-full w-full rounded-lg object-cover object-center"
+                    src={"/en1.png"}
+                    width={100}
+                    height={100}
+                  />
                 </div>
               </div>
-            ))
-            :
-            <div className='absolute '>
-            <Spinner />
+
+              <div className="flex w-full md:w-1/2 flex-wrap">
+                <div className="w-full md:w-1/2 p-1 md:p-2">
+                  <Image
+                    alt="gallery"
+                    className="block h-full w-full rounded-lg object-cover object-center"
+                    src={"/en2.png"}
+                    width={100}
+                    height={100}
+                  />
+                </div>
+
+                <div className="w-full md:w-1/2 p-1 md:p-2">
+                  <Image
+                    alt="gallery"
+                    className="block h-full w-full rounded-lg object-cover object-center"
+                    src={"/en3.png"}
+                    width={100}
+                    height={100}
+                  />
+                </div>
+
+                <div className="w-full md:w-1/2 p-1 md:p-2">
+                  <Image
+                    alt="gallery"
+                    className="block h-full w-full rounded-lg object-cover object-center"
+                    src={"/en4.png"}
+                    width={100}
+                    height={100}
+                  />
+                </div>
+                <div className="w-full md:w-1/2 p-1 md:p-2">
+                  <Image
+                    alt="gallery"
+                    className="block h-full w-full rounded-lg object-cover object-center"
+                    src={"/en5.png"}
+                    width={100}
+                    height={100}
+                  />
+                </div>
+              </div>
             </div>
-            }
-
           </div>
-    
-    
-    
-    
 
-    
-    <Footer/>
-    </div>
+          {/* Our Product */}
+
+          <div
+            id="product-container"
+            className="font-semibold text-[32px] mt-10 text-center"
+          >
+            Our Product
+          </div>
+          <div className="flex items-center justify-center md:justify-normal flex-wrap gap-3 mt-6 mb-24">
+            {products?.length > 0 ? (
+              products?.map((product: any, index) => (
+                <div key={index} className="max-w-[298px] p-1 ">
+                  {" "}
+                  <img src={urlFor(product?.image).url()} alt="image" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex justify-between gap-2 items-center mt-2">
+                        <h1 className="text-md hover:text-[#029FAE] font-semibold">
+                          {product?.title}
+                        </h1>
+                        <ShoppingCart
+                          onClick={() =>
+                            router.push(
+                              `/dashboard/allproducts/detail?productId=${String(
+                                product._id
+                              )}`
+                            )
+                          }
+                          className="hover:bg-[#029FAE] hover:text-white bg-slate-100 rounded-sm p-[0px]"
+                        />
+                      </div>
+
+                      <h1 className="text-sm hover:text-[#029FAE]">
+                        {product?.description?.slice(0, 50)}
+                      </h1>
+                      <h1 className="font-bold">${product?.price}</h1>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="absolute ">
+                <Spinner />
+              </div>
+            )}
+          </div>
+
+          <Footer />
+        </div>
       </div>
-    
     </>
   );
 }
