@@ -9,21 +9,19 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import Image from "next/image";
-import { useRouter ,usePathname} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Link as ScrollLink } from 'react-scroll';
 import Swal from "sweetalert2";
 
 export default function Home() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  
-  const {totalCarts:cartItems} = useCart()
 
+  const { totalCarts: cartItems } = useCart();
   useEffect(() => {
     setIsOpen(false);
-  },[pathname]);
+  }, [pathname]);
 
   function handleLogOut() {
     Swal.fire({
@@ -39,18 +37,23 @@ export default function Home() {
       if (result.isConfirmed) {
         localStorage.removeItem("user"); // Remove user data from localStorage
         router.push("/"); // Redirect to the homepage or login page
-  
-        Swal.fire("Logged Out!", "You have been successfully logged out.", "success");
+
+        Swal.fire(
+          "Logged Out!",
+          "You have been successfully logged out.",
+          "success"
+        );
       }
     });
   }
-  
 
   return (
     <>
       {/*  Top Nav */}
-      <div className="flex justify-center md:justify-between bg-[#272343] text-white items-center 
-       md:px-5 lg:px-[300px] py-[14px]">
+      <div
+        className="flex justify-center md:justify-between bg-[#272343] text-white items-center 
+       md:px-5 lg:px-[300px] py-[14px]"
+      >
         <div className="hidden items-center gap-2 md:flex">
           {" "}
           <span>
@@ -73,16 +76,20 @@ export default function Home() {
       </div>
 
       {/* Mid Nav */}
-      <div
-      onClick={() => router.push("/dashboard/bag")}
-      className="flex cursor-pointer justify-between bg-[#f0f2f3]  items-center px-5 lg:px-[300px] py-[20px]">
-        <div className="flex items-center gap-3">
+      <div className="flex cursor-pointer justify-between bg-[#f0f2f3]  items-center px-5 lg:px-[300px] py-[20px]">
+        <div
+          onClick={() => router.push("/dashboard")}
+          className="flex items-center gap-3"
+        >
           {" "}
           <Image src={"/logo.png"} alt="logo" width={40} height={40} />
           <p className="text-3xl font-bold">Comforty</p>
         </div>
 
-        <div className="flex items-center gap-4 rounded-lg p-2 bg-white">
+        <div
+          onClick={() => router.push("/dashboard/bag")}
+          className="flex items-center gap-4 rounded-lg p-2 bg-white"
+        >
           <ShoppingCart />
           <span>Cart</span>
           <span className="w-8 h-8 flex justify-center items-center bg-[#007580] text-white rounded-full">
@@ -96,29 +103,44 @@ export default function Home() {
         <div className="hidden md:flex items-center gap-[32px] font-bold text-[14px] text-slate-500">
           <h1
             onClick={() => router.push("/dashboard")}
-            className="hover:text-[#007580] cursor-pointer"
+            className={`hover:text-[#007580] cursor-pointer ${
+              pathname === "/dashboard" && "text-[#007580]"
+            }`}
           >
             Home
           </h1>
-          <h1 className="hover:text-[#007580] cursor-pointer"><ScrollLink to="product-container" smooth={true} duration={500}
-          >Product</ScrollLink></h1>
+          <h1
+            onClick={() => router.push("/dashboard/allproducts/null")}
+            className={`hover:text-[#007580] cursor-pointer ${
+              pathname.includes("/dashboard/allproducts/") && "text-[#007580]"
+            }`}
+          >
+            Product
+          </h1>
           <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
           <h1
             onClick={() => router.push("/dashboard/contactus")}
-            className="hover:text-[#007580] cursor-pointer"
+            className={`hover:text-[#007580] cursor-pointer ${
+              pathname.includes("/dashboard/contactus") && "text-[#007580]"
+            }`}
           >
             Contact us
           </h1>
 
           <h1
             onClick={() => router.push("/dashboard/aboutus")}
-            className="hover:text-[#007580] cursor-pointer"
+            className={`hover:text-[#007580] cursor-pointer ${
+              pathname.includes("/dashboard/aboutus") && "text-[#007580]"
+            }`}
           >
             About us
           </h1>
           <h1
-           onClick={handleLogOut}
-          className="hover:text-[#007580] cursor-pointer">Log out</h1>
+            onClick={handleLogOut}
+            className="hover:text-[#007580] cursor-pointer"
+          >
+            Log out
+          </h1>
         </div>
 
         <div className="flex items-center gap-4 rounded-lg p-2 ">
@@ -140,29 +162,44 @@ export default function Home() {
           <div className="flex flex-col items-center gap-[32px] font-bold text-[14px] text-slate-500">
             <h1
               onClick={() => router.push("/dashboard")}
-              className="hover:text-[#007580] cursor-pointer"
+              className={`hover:text-[#007580] cursor-pointer ${
+                pathname === "/dashboard" && "text-[#007580]"
+              }`}
             >
               Home
             </h1>
-            <h1 className="hover:text-[#007580] cursor-pointer"><ScrollLink to="product-container" smooth={true} duration={500}
-          >Product</ScrollLink></h1>
+            <h1
+              onClick={() => router.push("/dashboard/allproducts/null")}
+              className={`hover:text-[#007580] cursor-pointer ${
+                pathname.includes("/dashboard/allproduct") && "text-[#007580]"
+              }`}
+            >
+              Product
+            </h1>
             <h1 className="hover:text-[#007580] cursor-pointer">Pages</h1>
             <h1
-            onClick={() => router.push("/dashboard/contactus")}
-            className="hover:text-[#007580] cursor-pointer"
-          >
-            Contact us
-          </h1>
+              onClick={() => router.push("/dashboard/contactus")}
+              className={`hover:text-[#007580] cursor-pointer ${
+                pathname.includes("/dashboard/contactus") && "text-[#007580]"
+              }`}
+            >
+              Contact us
+            </h1>
 
-          <h1
-            onClick={() => router.push("/dashboard/aboutus")}
-            className="hover:text-[#007580] cursor-pointer"
-          >
-            About us
-          </h1>
-          <h1
-           onClick={handleLogOut}
-          className="hover:text-[#007580] cursor-pointer">Log out</h1>
+            <h1
+              onClick={() => router.push("/dashboard/aboutus")}
+              className={`hover:text-[#007580] cursor-pointer ${
+                pathname.includes("/dashboard/aboutus") && "text-[#007580]"
+              }`}
+            >
+              About us
+            </h1>
+            <h1
+              onClick={handleLogOut}
+              className="hover:text-[#007580] cursor-pointer"
+            >
+              Log out
+            </h1>
           </div>
         </div>
       </div>
